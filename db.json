@@ -1,0 +1,58 @@
+{
+  "user": {
+    "id": "codexbridge",
+    "password": "1234"
+  },
+  "items": [
+    {
+      "RegisterNo": "1111111",
+      "Date": "01/25/2022",
+      "Customer": "고객",
+      "Model": "슈링크울트라포머",
+      "PartCount": "1",
+      "ModelSerialNo": "111111-111111",
+      "Result": "접수대기",
+      "id": 1
+    },
+    {
+      "RegisterNo": "2222222",
+      "Date": "01/26/2022",
+      "Customer": "대리점",
+      "Model": "울트라포머",
+      "PartCount": "2",
+      "ModelSerialNo": "222222-222222",
+      "Result": "접수완료",
+      "id": 2
+    },
+    {
+      "RegisterNo": "33333333",
+      "Date": "01/26/2022",
+      "Customer": "대리점",
+      "Model": "울트라포머",
+      "PartCount": "3",
+      "ModelSerialNo": "3333333-3333333",
+      "Result": "무상교체",
+      "id": 3
+    },
+    {
+      "RegisterNo": "4444444",
+      "Date": "01/26/2022",
+      "Customer": "고객",
+      "Model": "울트라포머",
+      "PartCount": "4",
+      "ModelSerialNo": "4444444-4444444",
+      "Result": "유상교체",
+      "id": 4
+    },
+    {
+      "RegisterNo": "55555555",
+      "Date": "01/26/2022",
+      "Customer": "대리점",
+      "Model": "울트라포머",
+      "PartCount": "5",
+      "ModelSerialNo": "555555-5555555",
+      "Result": "반송",
+      "id": 5
+    }
+  ]
+}

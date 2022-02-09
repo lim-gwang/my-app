@@ -1,0 +1,95 @@
+@import '../../style/common.css';
+:root {
+	--ion-color-login: #707070;
+	--ion-color-login-rgb: 112,112,112;
+	--ion-color-login-contrast: #ffffff;
+	--ion-color-login-contrast-rgb: 255,255,255;
+	--ion-color-login-shade: #636363;
+	--ion-color-login-tint: #7e7e7e;
+}
+.ion-color-login {
+   height:6rem;
+   border-radius: 10px;
+   overflow:hidden;
+	--ion-color-base: var(--ion-color-login);
+	--ion-color-base-rgb: var(--ion-color-login-rgb);
+	--ion-color-contrast: var(--ion-color-login-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-login-contrast-rgb);
+	--ion-color-shade: var(--ion-color-login-shade);
+	--ion-color-tint: var(--ion-color-login-tint);
+}
+.no-scroll {
+   --overflow:hidden;
+}
+/*------------------------------------*\
+  #LOGIN
+\*------------------------------------*/
+#login {
+   position: absolute;
+   width:calc(100% - 3rem);
+   max-width:70rem;
+   padding:7rem 15rem;
+   border-radius: 10px;
+   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+   background-color: #fff;
+   left:50%;
+   top:50%;
+   transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
+}
+   .login__logo-title {
+      position:relative;
+      text-align:center;
+      padding-bottom:5rem;
+      margin-bottom:5rem;
+   }
+   .login__logo-title::before {
+      content:'';
+      position: absolute;
+      width:3rem;
+      height:.3rem;
+      background-color: #707070;
+      bottom:0;
+      left:50%;
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+   }
+
+.login-form {text-align:center;}
+
+   .login-form__section {
+      margin-bottom: 7rem;
+      text-align:left;
+   }
+      .login-section article {margin-bottom:1.5rem;}
+      .login-section__btn {
+         margin-top:1.5rem;
+         font-size:1.6rem;
+         width:100%;
+         padding:2.1rem 1rem;
+         background-color:#707070;
+         color:#fff;
+         letter-spacing: -.5px;
+         border:1px solid #707070;
+         border-radius: 10px;
+         font-weight: 500;
+         transition: ease-out .3s;
+      }
+      .login-section__btn:focus,
+      .login-section__btn:hover {
+         background-color:#fff;
+         color:#707070;
+      }
+      .userData-search {
+         color:#999;
+         font-size:1.4rem;
+      }
+      
+/*------------------------------------*\
+  media query
+  
+  @max-width
+\*------------------------------------*/
+@media (max-width:1024px) {
+   #login {padding:7rem 5rem;}
+}

@@ -1,0 +1,51 @@
+.ion-color-search {
+   width:15rem;
+   height:4rem;
+   border-radius:.6rem;
+   overflow:hidden;
+}
+.register-header {
+   background-color:#fff;
+   box-shadow: 0px 0px 4px #979797;
+   border-radius:10px;
+   padding:3rem;
+}  
+   .register-header__section01 {
+      margin-bottom:2rem;
+      align-items: center;
+   }
+      .register-header__title {
+         font-size:1.6rem;
+         color:#1776E1;
+      }
+      .register-header__section01 > button {
+         font-size:1.4rem;
+         color:#ACACB1;
+      }
+
+input[type='radio'] + label {
+   font-size:1.4rem;
+   width:6rem;
+   height:4rem;
+   display:block;
+   padding:1.1rem .5rem;
+   border:1px solid #B5B5C3;
+   text-align:center;
+   color:#999; 
+   border-radius:2rem;
+   cursor: pointer;
+   transition: ease-out .3s;
+}
+input[type='radio']:hover + label,
+input[type='radio']:checked + label {
+   border-color:#1776E1;
+   color:#1776E1;
+}
+.register-header__section02,
+.date-wrap,
+.date-range,
+.data-tab {align-items: center;}
+
+.date-wrap {gap:1.5rem}
+.data-tab,
+.date-range {gap:1rem}

@@ -1,0 +1,72 @@
+/*------------------------------------*\
+  .ion-btn-style 
+\*------------------------------------*/
+:root {
+   /* 검색 버튼 스타일 */
+	--ion-color-search: #E1F0FF;
+	--ion-color-search-rgb: 225,240,255;
+	--ion-color-search-contrast: #1776E1;
+	--ion-color-search-contrast-rgb: 23,118,225;
+	--ion-color-search-shade: #c6d3e0;
+	--ion-color-search-tint: #e4f2ff;
+   /* 접수 버튼 스타일 */
+   --ion-color-reception: #1776E1;
+	--ion-color-reception-rgb: 23,118,225;
+	--ion-color-reception-contrast: #ffffff;
+	--ion-color-reception-contrast-rgb: 255,255,255;
+	--ion-color-reception-shade: #1468c6;
+	--ion-color-reception-tint: #2e84e4;
+   /* 헤더 메뉴 스타일 */
+   --ion-color-header-menu: none;
+	--ion-color-header-menu-rgb: 0,0,0;
+	--ion-color-header-menu-contrast: #333;
+	--ion-color-header-menu-contrast-rgb: 333,333,333;
+	--ion-color-header-menu-shade: none;
+	--ion-color-header-menu-tint: none;
+   /* cs관리 테이블 상세보기 버튼 */
+   --ion-color-tablebtn: #f3f6f8;
+	--ion-color-tablebtn-rgb: 243,246,248;
+	--ion-color-tablebtn-contrast: #5e6278;
+	--ion-color-tablebtn-contrast-rgb: 94,98,120;
+	--ion-color-tablebtn-shade: #d6d8da;
+	--ion-color-tablebtn-tint: #f4f7f9;
+}
+/* 검색 버튼 스타일 */
+.ion-color-search {
+   --box-shadow:none;
+	--ion-color-base: var(--ion-color-search);
+	--ion-color-base-rgb: var(--ion-color-search-rgb);
+	--ion-color-contrast: var(--ion-color-search-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-search-contrast-rgb);
+	--ion-color-shade: var(--ion-color-search-shade);
+	--ion-color-tint: var(--ion-color-search-tint);
+}
+/* 접수 버튼 스타일 */
+.ion-color-reception {
+	--ion-color-base: var(--ion-color-reception);
+	--ion-color-base-rgb: var(--ion-color-reception-rgb);
+	--ion-color-contrast: var(--ion-color-reception-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-reception-contrast-rgb);
+	--ion-color-shade: var(--ion-color-reception-shade);
+	--ion-color-tint: var(--ion-color-reception-tint);
+}
+/* 헤더 메뉴 스타일 */
+.ion-color-header-menu {
+   --box-shadow: none;
+	--ion-color-base: var(--ion-color-header-menu);
+	--ion-color-base-rgb: var(--ion-color-header-menu-rgb);
+	--ion-color-contrast: var(--ion-color-header-menu-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-header-menu-contrast-rgb);
+	--ion-color-shade: var(--ion-color-header-menu-shade);
+	--ion-color-tint: var(--ion-color-header-menu-tint);
+}
+/* cs관리 테이블 상세보기 버튼 */
+.ion-color-tablebtn {
+   --box-shadow:none;
+	--ion-color-base: var(--ion-color-tablebtn);
+	--ion-color-base-rgb: var(--ion-color-tablebtn-rgb);
+	--ion-color-contrast: var(--ion-color-tablebtn-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-tablebtn-contrast-rgb);
+	--ion-color-shade: var(--ion-color-tablebtn-shade);
+	--ion-color-tint: var(--ion-color-tablebtn-tint);
+}
