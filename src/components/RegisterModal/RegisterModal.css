@@ -10,3 +10,215 @@
       border:1px solid #979797;
    }
 }
+@media only screen and (min-width: 768px) and (min-height: 600px) {
+   .custom-modal::part(content) {
+      width:90%;
+      max-width:144.5rem;
+      height:80%;
+      max-height:90rem;
+      border-radius:1rem;
+      padding:3rem;
+      border:1px solid #979797;
+   }
+}
+.modal-header {
+   display:flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom:3rem;
+}
+.modal-header > article {
+   display:flex;
+   align-items: center;
+}
+.modal-header > article .btn {
+   margin:0 .5rem;
+}
+.ion-color-modal-save {margin-left:1rem;}
+.ion-color-modal-close {margin-left:3rem;}
+.modal-wrap {
+   height:100%;
+}
+.modal-body {
+   display: flex;
+   justify-content: space-between;
+   gap:1.5rem;
+   height:calc(100% - 7rem);
+}
+.modal-form {
+   width:25%;
+   max-width:34rem;
+   padding:2rem;
+   border-radius:10px;
+   background-color:#fff;
+   box-shadow:0px 0px 4px #979797;
+}
+.modal-items {
+   flex:1;
+   display:flex;
+   flex-flow:column;
+}
+.itemCount-area {
+   font-size:1.4rem;
+   padding:1.3rem 2rem;
+   border-radius:10px;
+   background-color:#fff;
+   box-shadow:0px 0px 4px #979797;
+   margin-bottom:1rem;
+}
+.items-list {
+   flex:1;
+   overflow-y: auto;
+   padding-top: 0.2rem;
+   padding-right: 0.2rem;
+   padding-left: 0.2rem;
+}
+.items-list > li {
+   padding:2rem;
+   border-radius:10px;
+   background-color:#fff;
+   box-shadow:0px 0px 4px #979797;
+   margin-bottom:1rem;
+   transition: ease-out .3s;
+}
+.items-list > li.close .itemBody {
+   display: none;
+}
+.items-list > li.close .itemBtn.toggle {
+   background-color: #fff;
+   color:#1776E1;
+   transform:rotate(180deg);
+   -webkit-transform:rotate(180deg);
+}
+.modal-form > ul {
+   display:flex;
+   flex-flow:column;
+   height:100%;
+}
+.custom-formItem {
+   margin-bottom:2.5rem;
+}
+.custom-formItem:last-child {
+   flex:1;
+}
+.custom-formItem label {
+   display:block;
+   margin-bottom:1rem;
+   font-size:1.4rem;
+   color:#333;
+}
+.custom-formItem label > span {
+   color:#FE3535;
+}
+.custom-formItem input,
+.custom-formItem textarea,
+.custom-formItem select {
+   width:100%;
+   display:block;
+}
+.modal-form .custom-formItem textarea {
+   height:100%;
+}
+
+
+.dropzone-ui-extra {
+   height:10rem;
+   width:100%;
+   border:3px dashed #51A2FF !important;
+   border-radius:.6rem;
+   background-color:rgba(225,240,255,.5) !important; 
+}
+.itemHeader {
+   display:flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.itemHeader .btnWrap {
+   margin:0;
+}
+.itemHeader .btnWrap .itemBtn {
+   margin:0 .75rem;
+}
+.itemBody {
+   padding-top:1.75rem;
+   margin-top:1.75rem;
+   border-top:1px solid #ECECEC;
+}
+.itemBody > div {
+   display: flex;
+   justify-content: space-between;
+   gap:5%;
+   margin-bottom:1.5rem;
+}
+.itemBody > div > span {
+   flex:1;
+}
+.file-title,
+.itemBody > div label {
+   display: block;
+   margin-bottom:1rem;
+   font-size:1.4rem;
+}
+.itemBody > div.col-ful {
+   display:block;
+}
+.file-title > span,
+.itemBody > div label > span {
+   padding:.2rem;
+   color: #FE3535;
+   font-size:1.4rem;
+}
+.itemBody > div textarea {
+   width:100%;
+   height: 10rem;
+}
+.itemBody > div input {
+   width:100%;
+}
+.modal-items .btnWrap.line {
+   width:100%;
+   position:relative;
+   text-align:center;
+   margin: 3rem auto 0 ;
+}
+.modal-items .btnWrap.line::before,
+.modal-items .btnWrap.line::after  {
+   content:"";
+   width:calc(50% - 23rem);
+   border-top: 2px solid #ECECEC;
+   position:absolute;
+   top:50%;
+   transform: translateY(-50%);
+}
+.modal-items .btnWrap.line::before {
+   left:0;
+}
+.modal-items .btnWrap.line::after {
+   right:0;
+}
+.additem-btn {
+   display:inline-block;
+   width:38rem;
+   height:5rem;
+   border-radius:.6rem;
+   color:#fff;
+   border:1px solid #1776E1;
+   background-color:#1776E1;
+   text-align:center;
+   font-size:1.5rem;
+   font-weight:bold;
+   transition: ease-out .3s;
+}
+.additem-btn > ion-icon {
+   margin: 0 0.5rem 0 0;
+   transform: translateY(0.2rem);
+}
+.additem-btn:hover,
+.additem-btn:focus {
+   background-color:#fff;
+   color:#1776E1;
+}
+/* .dropzone-ui .dz-ui-header,
+.dropzone-ui .dz-ui-footer {
+   display:none;
+} */

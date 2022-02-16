@@ -1,0 +1,14 @@
+@import './common.css';
+
+/*------------------------------------*\
+   @media query
+\*------------------------------------*/
+@media (max-width:1200px){
+   html{font-size: 9px;}
+}
+@media (max-width:1024px){
+   /* html{font-size: 8.5px;} */
+}
+@media (max-width: 768px){
+   html{font-size: 8px;}
+}

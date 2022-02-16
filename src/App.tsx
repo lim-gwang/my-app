@@ -3,15 +3,22 @@ import {
    IonApp,
    IonRouterOutlet,
    setupIonicReact,
-   IonPage
+   IonPage,
+   getPlatforms,
+   IonContent
 } from '@ionic/react';   
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route  } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-// import { fetchUserData } from './store/user/user';
+
+//component
 import Login from './pages/login/Login';
 import Main from './pages/Main';
 import ExceptionPath from './pages/exceptionPath/ExceptionPath';
+
+// router url
+import { routePath } from './router/router';
+
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -31,9 +38,15 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-import './style/common.css';
+// import './style/common.css';
 import './style/ionBtnStyle.css';
+import AppMain from './app/AppMain';
 setupIonicReact();
+
+// 현재 기기 체크
+const platforms = getPlatforms();
+const thisDeskTop = platforms.map(arg => arg === 'desktop')[0];
+
 
 const App = () => {
    const itemSelector = (state) => state.itemReducer.items;
@@ -45,24 +58,31 @@ const App = () => {
 
    const userItem = useSelector(itemSelector);
 
-   const routePath = {
-      login: '/login',
-      home: '/home'
+   
+
+   let mainPage = null;
+
+   if(thisDeskTop) {
+      // web
+      mainPage = <Route path={routePath.home} component={Main}/>
+   } else {
+      // app
+      mainPage =  <Route path={routePath.home} component={AppMain}/>
    }
+
    return (
       <IonApp>
          <IonPage>
             <IonReactRouter>
                <IonRouterOutlet>
                   {/* 로그인 */}
-                  <Route path='/login'component={Login}  exact={true}/>
+                  <Route path={routePath.login} component={Login}  exact={true}/>
                   {/* 기본 url */}
-                  <Route path="/" render={() => <Redirect to='/home'/>} exact={true}/>
+                  <Route path="/" render={() => <Redirect to={routePath.home}/>} exact={true}/>
                   {/* 없는경로 */}
                   <Route component={ExceptionPath} />
                </IonRouterOutlet>
-               {/* 메인페이지 */}
-               <Route path='/home' component={Main}/>
+               {mainPage}
             </IonReactRouter>
          </IonPage>
       </IonApp>

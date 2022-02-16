@@ -9,7 +9,12 @@ import {
 } from '@ionic/react';
 import { menu } from 'ionicons/icons'
 import { Link, Route, useHistory, NavLink } from 'react-router-dom';
-import './header.css';
+
+// function
+import { logout } from '../../store/user/user';
+
+// css
+import '../../commonComponent/header/header.css';
 
 const homeMenu = {
    menu : [
@@ -41,6 +46,11 @@ export const menus = homeMenu.menu.map((menu, index) => {
 function Header({windowSize, thisDeskTop}) {
    const history = useHistory();
 
+   const logoutAction = () => {
+      logout();
+      history.push('/login');
+    }
+
    return(
       <>
          <IonHeader>
@@ -48,7 +58,7 @@ function Header({windowSize, thisDeskTop}) {
                <IonButtons slot="start">
                   <IonMenuToggle>
                      <IonButton>
-                        <IonIcon icon={menu}/>
+                        <IonIcon icon={menu} style={{color:"#333"}}/>
                      </IonButton>
                   </IonMenuToggle>
                </IonButtons>
@@ -73,7 +83,7 @@ function Header({windowSize, thisDeskTop}) {
                          <li>
                             <button 
                                className='ion-color-header-menu' 
-                               onClick={()=> history.push('/login')}
+                               onClick={()=> logoutAction()}
                             >
                                로그아웃
                             </button>

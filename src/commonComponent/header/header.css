@@ -31,8 +31,4 @@
          gap:2.5rem;
          align-items: center;
       }
-         .ion-color-header-menu {font-size:1.6rem;color:#333; font-weight:500;}
-         .ion-color-header-menu.active {color:#1776E1}
-
-   .side-nav > li {padding:0 2rem;}
-   .side-nav .ion-color-header-menu {display: block;padding:1.5rem 0; border-bottom:1px solid #c8c8c8}
+   

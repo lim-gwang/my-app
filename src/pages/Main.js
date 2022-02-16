@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { 
-   IonButton,
    IonContent,
    IonPage,
    IonRouterOutlet,
-   IonTabs,
-   IonHeader,
-   IonTitle,
-   IonToolbar,
    getPlatforms
 } from '@ionic/react';  
 import { IonReactRouter  } from '@ionic/react-router';
-import { Redirect, Route, useParams, Link } from 'react-router-dom'; 
+import { Redirect, Route, useHistory } from 'react-router-dom'; 
 import { debounce } from 'lodash';
 
-import Header from '../components/header/Header';
-import SideMenu from '../components/header/SideMenu';
+// router url
+import { routePath, subRouterPath } from '../router/router';
+
+// component
+import Header from '../commonComponent/header/Header';
+import SideMenu from '../commonComponent/sideMenu/SideMenu';
 import RegisterList from './registerList/RegisterList';
 import RegisterList2 from './testpage/RegisterList2';
 import Select from 'react-select';
@@ -44,6 +43,8 @@ const platforms = getPlatforms();
 const thisDeskTop = platforms.map(arg => arg === 'desktop')[0];
 
 function Main() {
+   const history = useHistory();
+
    // window width check
    const [ windowSize, setWindowSize ] = useState({
       width: window.innerWidth
@@ -59,8 +60,7 @@ function Main() {
       return () => {
          window.removeEventListener('resize', handleResize);
       }
-   });
-
+   }, []);
    return(
       <>
          <SideMenu/>   
@@ -68,19 +68,18 @@ function Main() {
          <Header windowSize={windowSize.width} thisDeskTop={thisDeskTop}/> 
             <IonContent>
                   <IonRouterOutlet>
-                     <Route path='/home/menu1' exact={true} render={ props => (
+                     <Route path={subRouterPath.page1} exact={true} render={ props => (
                         <RegisterList windowSize={windowSize.width} thisDeskTop={thisDeskTop} {...props}/>
                      )}/>
                      {/* <Route path='/home/menu1' component={RegisterList} exact={true}/> */}
-                     <Route path='/home/menu2' component={RegisterList2} exact={true}/>
-                     <Route path='/home/myPage' component={MyPage} exact={true}/>
-                     <Route path="/home" render={() => <Redirect to='/home/menu1'/>} exact={true}/>
+                     <Route path={subRouterPath.page2} component={RegisterList2} exact={true}/>
+                     <Route path={routePath.home} render={() => <Redirect to={subRouterPath.page1}/>} exact={true}/>
                      <Route component={ExceptionPath} />
                   </IonRouterOutlet>
             </IonContent>
          </IonPage>
-      </>
-   );
+      </>   
+   ); 
 
 }
 

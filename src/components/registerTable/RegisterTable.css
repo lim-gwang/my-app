@@ -76,3 +76,19 @@
          background-color:#fef5f8;
          color:#f34972;
       }
+
+.mobile-List > li {
+   background-color: #fff;
+   box-shadow: 0px 0px 4px #979797;
+   border-radius: 10px;
+   padding: 20px;
+   margin-top:15px;
+}
+
+@media (max-width:1024px) {
+   .register-body {
+      background:none;
+      box-shadow: none;
+      padding:0;
+   }
+}

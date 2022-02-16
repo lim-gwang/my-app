@@ -31,12 +31,44 @@ button,input,optgroup,pre,select,textarea{color:inherit;margin:0}
    background-color:#c6d3e0 !important;
 }
 
-input {
-    border:1px solid #dedee4 !important;
-    padding: 2rem 3rem !important;
-    border-radius:10px !important;
-    transition: all .3s;
+.sc-ion-input-md-h {
+   font-size:1.4rem;
+   --padding-top: 1rem;
+   --padding-end: 1.5rem;
+   --padding-bottom: 1rem;
+   --padding-start: 1.5rem;
+   border: 1px solid #B5B5C3;
+   border-radius:3px;
+   color:#333;
 }
+.native-textarea.sc-ion-textarea-md {
+   font-size:1.4rem;
+   border: 1px solid #B5B5C3;
+   border-radius:3px;
+   color:#333;
+   --padding-top: 1.2rem;
+   --padding-end: 1.6rem;
+   --padding-bottom: 1.2rem;
+   --padding-start: 1.6rem;
+}
+
+input {
+   padding:1rem 1.5rem;
+   font-size:1.4rem;
+   border: 1px solid #B5B5C3;
+   border-radius:3px;
+   background-color:#fff;
+   color:#333;
+}
+textarea {
+   padding:1.2rem 1.6rem;
+   font-size:1.4rem;
+   border: 1px solid #B5B5C3;
+   border-radius:3px;
+   color:#333;
+   background-color:#fff;
+}
+
 input[type='date'] {
    background-color:#1776e1 !important;
    color:#fff !important;
@@ -50,14 +82,25 @@ input[type="date" i] {
    background-repeat:no-repeat;
    background-position: center;
 }
+textarea::placeholder,
 input::placeholder {
    color: #999;
+   font-size:1.4rem;
 }
+select:focus,
+textarea:focus,
 input:focus {
     outline: none;
     border-color: #1776e1 !important;
 }
-
+select {
+   font-size:1.4rem;
+   color:#333;
+   padding:.9rem 1.5rem;
+   background-color:#fff;
+   border-color:#B5B5C3;
+   border-radius:3px;
+}
 .css-6j8wv5-Input > input {
    border: none !important;
     padding: 0 !important;
@@ -66,6 +109,72 @@ input:focus {
 .bg-color1 {
    --background:#F2F2F2;
 }
+/*------------------------------------*\
+  button
+\*------------------------------------*/
+.btn {
+   display:inline-block;
+   text-align:center;
+   font-size:1.5rem;
+   width:12rem;
+   height:4rem;
+   padding:0 1rem;
+   line-height:4rem;
+   border-radius: .6rem;
+   border-style:solid;
+   border-width:1px;
+   transition:ease-out .3s;
+}
+   .btn.cancel {
+      border-color: #1776E1;
+      color:#1776E1;
+      background-color:#fff;
+   }
+   .btn.cancel:hover,
+   .btn.cancel:focus {
+      color:#fff;
+      background-color:#1776E1;
+   }
+   .btn.save {
+      border-color: #1776E1;
+      color:#fff;
+      background-color:#1776E1;
+   }
+   .btn.save:hover,
+   .btn.save:focus {
+      color:#1776E1;
+      background-color:#fff;
+   }
+
+   .itemBtn {
+      position:relative;
+      display: inline-block;
+      text-align:center;
+      width:3rem;
+      height:3rem;
+      border-radius:100%;
+      font-size:2.5rem;
+      transition: ease-out .3s;
+   }
+   .itemBtn > ion-icon {
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%);
+      -webkit-transform:translate(-50%, -50%);
+   }
+   .itemBtn.delete {
+      border:1px solid #E1F0FF;
+      background-color:#E1F0FF;
+      color: #1776E1;
+   }
+   .itemBtn.toggle {
+      border: 1px solid #1776E1;
+      background-color: #1776E1;
+      color:#fff;
+   }
+
+
 /*------------------------------------*\
   scroll
 \*------------------------------------*/
@@ -177,15 +286,3 @@ input:focus {
     #header, aside, #footer {display:none!important;}
     .container {width:100%!important;zoom:.6;}  
   }
-/*------------------------------------*\
-   @media query
-\*------------------------------------*/
-@media (max-width:1200px){
-    html{font-size: 9px;}
-}
-@media (max-width:1024px){
-    /* html{font-size: 8.5px;} */
-}
-@media (max-width: 768px){
-    html{font-size: 8px;}
-}

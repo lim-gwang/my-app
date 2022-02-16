@@ -1,24 +1,45 @@
 import axios from 'axios';
 import { addList, delList } from '../actions/actions';
 import { 
-   LOGIN
+   LOGIN,
+   USER_DATA
  } from '../../localServer/dotenv';
 
 
 // 로그인
-export const login = async (userData) => {
-   const loginData = await axios.post(LOGIN, userData);
-    
-    return loginData;
+export const login = ({id, pw}) => {
+   let formData = new FormData();
+   formData.append('id', id);
+   formData.append('pw', pw);
+
+   return axios.post(LOGIN, formData)
+      .then(res => {
+         const message = res.data.Message;
+         const token = res.data.IdentityCode;
+         sessionStorage.setItem('token', token);
+         return  {
+            message,
+            token
+         };
+      });
+}
+// 로그아웃
+export const logout = () => {
+   sessionStorage.removeItem('token');
 }
 
-// // CS 리스트
-// const userData = async () => {
-//     const items = await axios.get(LOCAL_DATA_ITEMS)
-//         .then(res => res.data);
+// 유저 정보
+const userData = async () => {
+
+    const items = await axios.get(USER_DATA, {
+      headers: {
+         jwttoken: sessionStorage.getItem('jwttoken')
+      }
+   })
+   .then(res => res);
       
-//       return items;
-// };
+   return items;
+};
   
 
 // // CS 삭제

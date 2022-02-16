@@ -62,6 +62,95 @@ function RegisterTable({windowSize, thisDeskTop}) {
          id
       })
    };
+
+
+   const PcConents = () => (
+      <table className='table list-table'>
+         <colgroup>
+            <col />
+            <col />
+            <col className='w10'/>
+            <col />
+            <col className='w10'/>
+            <col />
+            <col />
+            <col />
+         </colgroup>
+         <thead>
+            <tr>
+               <th scope='col'>
+                  Register No
+               </th>
+               <th scope='col'>
+                  Date
+               </th>
+               <th scope='col'>
+                  Customer
+               </th>
+               <th scope='col'>
+                  Model
+               </th>
+               <th scope='col'>
+                  Part Count
+               </th>
+               <th scope='col'>
+                  Model Serial No
+               </th>
+               <th scope='col'>
+                  Result
+               </th>
+               <th scope='col'>
+                  View
+               </th>
+            </tr>
+         </thead>
+         <tbody>
+            {tableList}
+         </tbody>
+      </table>
+   )
+   const MobileConents = () => (
+      <ul className='mobile-List'>
+         <li>
+            <div>
+               <strong>
+                  Register No.
+               </strong>
+               <span>
+                  CS202201030004
+               </span>
+            </div>
+            <div>
+               <strong>
+                  Date
+               </strong>
+               <span>
+                  2022-01-20
+               </span>
+            </div>
+            <div>
+               <strong>
+                Device Model 
+               </strong>
+               <span>
+                  aklsdmkasmd
+               </span>
+            </div>
+            <div>
+               <strong>
+                  Result
+               </strong>
+               <span>
+                  접수대기
+               </span>
+            </div>
+            <button>
+               View
+            </button>
+         </li>
+      </ul>
+   )
+
    const userTargetData = stateItems.filter(item=> item.id === modalData.id)[0];
    
    const closeModal = () => {
@@ -81,49 +170,13 @@ function RegisterTable({windowSize, thisDeskTop}) {
                건의 접수가 되었습니다.
             </p>
             <div className='register-itemWrap'>
-               <table className='table list-table'>
-                  <colgroup>
-                     <col />
-                     <col />
-                     <col className='w10'/>
-                     <col />
-                     <col className='w10'/>
-                     <col />
-                     <col />
-                     <col />
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th scope='col'>
-                           Register No
-                        </th>
-                        <th scope='col'>
-                           Date
-                        </th>
-                        <th scope='col'>
-                           Customer
-                        </th>
-                        <th scope='col'>
-                           Model
-                        </th>
-                        <th scope='col'>
-                           Part Count
-                        </th>
-                        <th scope='col'>
-                           Model Serial No
-                        </th>
-                        <th scope='col'>
-                           Result
-                        </th>
-                        <th scope='col'>
-                           View
-                        </th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     {tableList}
-                  </tbody>
-               </table>
+               {windowSize < 1024 || !thisDeskTop ? 
+                  (
+                     MobileConents()
+                  ):(
+                     PcConents()
+                  )
+               }
             </div>
          </article>
          <NewRegisterModal 

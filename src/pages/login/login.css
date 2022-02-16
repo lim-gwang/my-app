@@ -1,14 +1,16 @@
 @import '../../style/common.css';
 :root {
-	--ion-color-login: #707070;
+	--ion-color-login: #1776E1;
 	--ion-color-login-rgb: 112,112,112;
-	--ion-color-login-contrast: #ffffff;
+	--ion-color-login-contrast: #fff;
 	--ion-color-login-contrast-rgb: 255,255,255;
-	--ion-color-login-shade: #636363;
-	--ion-color-login-tint: #7e7e7e;
+	--ion-color-login-shade: #1776E1;
+	--ion-color-login-tint: #1776E1;
 }
 .ion-color-login {
    height:6rem;
+   padding:0;
+   width:100%;
    border-radius: 10px;
    overflow:hidden;
 	--ion-color-base: var(--ion-color-login);
@@ -62,6 +64,13 @@
       text-align:left;
    }
       .login-section article {margin-bottom:1.5rem;}
+      .login-section input {
+         width:100%;
+         border:1px solid #dedee4 ;
+         padding: 2rem 3rem ;
+         border-radius:10px;
+         transition: all .3s;
+     }
       .login-section__btn {
          margin-top:1.5rem;
          font-size:1.6rem;
@@ -91,5 +100,8 @@
   @max-width
 \*------------------------------------*/
 @media (max-width:1024px) {
-   #login {padding:7rem 5rem;}
+   #login {padding:7rem 5rem; box-shadow:none;}
+}
+@media (max-width:430px) {
+   #login {padding:7rem 20px;}
 }

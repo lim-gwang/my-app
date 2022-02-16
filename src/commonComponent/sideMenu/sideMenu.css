@@ -1,0 +1,58 @@
+.in-toolbar {
+   --min-height:auto;
+}
+.ion-color-header-menu {font-size:1.6rem;color:#333; font-weight:500;}
+.ion-color-header-menu.active {color:#1776E1}
+
+.side-nav > li {padding:0 2rem;}
+.side-nav .ion-color-header-menu {display: block;padding:7.5px 0; line-height:1;}
+
+.sideMenu-header {
+   display: flex;
+   align-items: center;
+   height:80px;
+   border-bottom: 1px solid #DADAE1;
+   padding: 10px 25px 10px 30px;
+   justify-content: space-between;
+}
+.sideMenu-header > strong {
+   color: #1776E1;
+   font-size:19px;
+}
+.sideMenu-header > strong > span {
+   color:#333;
+   padding-left: 5px;
+}
+.sideMenu-header > button {
+   color: #ACACB1;
+   font-size:13px;
+}
+.side-nav {
+   padding: 30px 20px;
+} 
+.side-nav .depth1 {
+   font-size:17px;
+   color:#333;
+}
+.side-nav .depth2 {
+   margin-top:20px;
+}
+.side-nav .depth2 > li > a {
+   position:relative;
+   padding-left:15px;
+   font-size:15px;
+}
+.side-nav .depth2 > li > a::before {
+   content:"";
+   width:5px;
+   height:1px;
+   background-color:#333;
+   position:absolute;
+   left:0;
+   top:50%;
+   transform: translateY(-50%);
+   -webkit-transform: translateY(-50%);
+}
+.side-nav .depth2 > li > a.active::before {
+   background-color: #1776E1;
+}

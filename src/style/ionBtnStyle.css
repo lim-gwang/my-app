@@ -30,6 +30,20 @@
 	--ion-color-tablebtn-contrast-rgb: 94,98,120;
 	--ion-color-tablebtn-shade: #d6d8da;
 	--ion-color-tablebtn-tint: #f4f7f9;
+   /* 모달 캔슬버튼 */
+   --ion-color-modal-cancel: #fff;
+	--ion-color-modal-cancel-rgb: 255,255,255;
+	--ion-color-modal-cancel-contrast: #1776E1;
+	--ion-color-modal-cancel-contrast-rgb: 0,0,0;
+	--ion-color-modal-cancel-shade: #1776E1;
+	--ion-color-modal-cancel-tint: #1776E1;
+   /* 모달 닫기 버튼 */
+   --ion-color-modal-close: #E1F0FF;
+	--ion-color-modal-close-rgb: 225,240,255;
+	--ion-color-modal-close-contrast: #2077DA;
+	--ion-color-modal-close-contrast-rgb: 32,119,218;
+	--ion-color-modal-close-shade: #c6d3e0;
+	--ion-color-modal-close-tint: #e4f2ff;
 }
 /* 검색 버튼 스타일 */
 .ion-color-search {
@@ -69,4 +83,40 @@
 	--ion-color-contrast-rgb: var(--ion-color-tablebtn-contrast-rgb);
 	--ion-color-shade: var(--ion-color-tablebtn-shade);
 	--ion-color-tint: var(--ion-color-tablebtn-tint);
+}
+
+/* 모달 캔슬버튼 */
+.ion-color-modal-cancel {
+   --box-shadow:none;
+   width:12rem;
+   height:12rem;
+   height:4rem;
+   --border-radius:6px;
+	--ion-color-base: var(--ion-color-modal-cancel);
+	--ion-color-base-rgb: var(--ion-color-modal-cancel-rgb);
+	--ion-color-contrast: var(--ion-color-modal-cancel-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-modal-cancel-contrast-rgb);
+	--ion-color-shade: var(--ion-color-modal-cancel-shade);
+	--ion-color-tint: var(--ion-color-modal-cancel-tint);
+}
+.ion-color-modal-save {
+   width:12rem;
+   height:12rem;
+   height:4rem;
+}
+/* 모달 닫기 버튼 */
+.ion-color-modal-close {
+   width:4rem;
+   height:4rem;
+   font-size:1.6rem;
+   --border-radius:100%;
+   --padding-start:0;
+   --padding-end:0;
+   --box-shadow:none;
+	--ion-color-base: var(--ion-color-modal-close);
+	--ion-color-base-rgb: var(--ion-color-modal-close-rgb);
+	--ion-color-contrast: var(--ion-color-modal-close-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-modal-close-contrast-rgb);
+	--ion-color-shade: var(--ion-color-modal-close-shade);
+	--ion-color-tint: var(--ion-color-modal-close-tint);
 }
