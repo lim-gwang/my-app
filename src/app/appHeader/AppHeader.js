@@ -7,6 +7,9 @@ import {
    IonButton,
 } from '@ionic/react';  
 
+//css 
+import './appheader.css';
+
 function AppHeader({title}) {
    return(
       <IonHeader mode='ios' className="ion-no-border">

@@ -70,7 +70,6 @@ function SideMenu () {
                            {menus}
                         </ul>
                      </li>
-
                   </ul>
                </IonMenuToggle>
             </IonList>

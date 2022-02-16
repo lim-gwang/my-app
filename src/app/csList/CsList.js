@@ -20,10 +20,8 @@ function CsList() {
          <SideMenu/>
          <IonPage id="main-content">
          <Header/> 
-            <IonContent class='app-content' scrollY={true}>
-               <h1>
-                  APP!!!!!
-               </h1>
+            <IonContent class='app-content'>
+
                <Nav/>
             </IonContent>
          </IonPage>

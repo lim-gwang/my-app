@@ -7,10 +7,10 @@ import {
 import { Link, useHistory } from 'react-router-dom';
 
 // router url
-import { routePath } from '../../router/router';
+import { routePath } from '../router/router';
 
 // css
-import '../../pages/login/login.css';
+import '../login/login.css';
 
 function ExceptionPath() {
    const token = sessionStorage.getItem('token');

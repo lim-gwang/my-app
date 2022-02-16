@@ -12,9 +12,9 @@ import { Redirect, Route  } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 //component
-import Login from './pages/login/Login';
-import Main from './pages/Main';
-import ExceptionPath from './pages/exceptionPath/ExceptionPath';
+import Login from './login/Login';
+import Main from './web/Main';
+import ExceptionPath from './exceptionPath/ExceptionPath';
 
 // router url
 import { routePath } from './router/router';
@@ -86,7 +86,7 @@ const App = () => {
             </IonReactRouter>
          </IonPage>
       </IonApp>
-   );
+   )
 };
 
 export default App;

@@ -36,150 +36,21 @@ function NewRegister({title}) {
       <IonPage>
          {/* <IonContent> */}
          <AppHeader title={title}/>
-            <IonContent 
-               class='app-content'
-               scrollY={true}
-               scrollEvents={true}
-               onIonScrollStart={() => {}}
-               onIonScroll={() => {}}
-               onIonScrollEnd={() => {}}
-            >
-                  <div>
-
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                           <h1>
-                              step1 cs 요청 정보 입력
-                           </h1>
-                  </div>
-               <IonButton slot='fixed' routerLink='/home/menu2/step2'>
+         <IonContent 
+            class='app-content tabBtn-wraper'
+            scrollY={true}
+            scrollEvents={true}
+            onIonScrollStart={() => {}}
+            onIonScroll={() => {}}
+            onIonScrollEnd={() => {}}
+         >
+            <div slot='fixed' className='app-btn-wrap'>
+               <IonButton class='app-tab-btn' routerLink='/home/menu2/step2'>
                   다음
                </IonButton>
-            </IonContent>
+            </div>
+       
+         </IonContent>
          {/* </IonContent> */}
       </IonPage>
    )

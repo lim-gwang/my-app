@@ -1,4 +1,4 @@
-@import '../../style/common.css';
+@import '../style/common.css';
 :root {
 	--ion-color-login: #1776E1;
 	--ion-color-login-rgb: 112,112,112;

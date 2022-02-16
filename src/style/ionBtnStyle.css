@@ -44,6 +44,22 @@
 	--ion-color-modal-close-contrast-rgb: 32,119,218;
 	--ion-color-modal-close-shade: #c6d3e0;
 	--ion-color-modal-close-tint: #e4f2ff;
+   /* 앱 바텀 탭 이전 버튼 */
+   --ion-color-tab-back: #fff;
+	--ion-color-tab-back-rgb: 255,255,255;
+	--ion-color-tab-back-contrast: #000000;
+	--ion-color-tab-back-contrast-rgb: 0,0,0;
+	--ion-color-tab-back-shade: #e0e0e0;
+	--ion-color-tab-back-tint: #ffffff;
+}
+/* 앱 바텀 탭 이전 버튼 */
+.ion-color-tab-back {
+	--ion-color-base: var(--ion-color-tab-back);
+	--ion-color-base-rgb: var(--ion-color-tab-back-rgb);
+	--ion-color-contrast: var(--ion-color-tab-back-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-tab-back-contrast-rgb);
+	--ion-color-shade: var(--ion-color-tab-back-shade);
+	--ion-color-tint: var(--ion-color-tab-back-tint);
 }
 /* 검색 버튼 스타일 */
 .ion-color-search {
@@ -119,4 +135,12 @@
 	--ion-color-contrast-rgb: var(--ion-color-modal-close-contrast-rgb);
 	--ion-color-shade: var(--ion-color-modal-close-shade);
 	--ion-color-tint: var(--ion-color-modal-close-tint);
+}
+
+.ion-color-tab-back {
+   --ion-color-base-rgb: var(--ion-color-tab-back-rgb);
+	--ion-color-contrast: var(--ion-color-tab-back-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-tab-back-contrast-rgb);
+	--ion-color-shade: var(--ion-color-modal-close-shade);
+	--ion-color-tint: var(--ion-color-tab-back-tint);
 }

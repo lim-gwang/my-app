@@ -1,8 +1,45 @@
+
+:root {
+   /* 앱 바텀 탭 이전 버튼 */
+   --ion-color-tab-back: #fff;
+	--ion-color-tab-back-rgb: 255,255,255;
+	--ion-color-tab-back-contrast: #3171e0;
+	--ion-color-tab-back-contrast-rgb: 0,0,0;
+	--ion-color-tab-back-shade: #e0e0e0;
+	--ion-color-tab-back-tint: #ffffff;
+}
+/* 앱 바텀 탭 이전 버튼 */
+.ion-color-tab-back {
+	--ion-color-base: var(--ion-color-tab-back);
+	--ion-color-base-rgb: var(--ion-color-tab-back-rgb);
+	--ion-color-contrast: var(--ion-color-tab-back-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-tab-back-contrast-rgb);
+	--ion-color-shade: var(--ion-color-tab-back-shade);
+	--ion-color-tint: var(--ion-color-tab-back-tint);
+}
+
+
 .backBtn {
    --color:#333;
    font-size:16px;
 }
-
 .newRegister-title {
    font-size:18px;
+}
+
+.app-btn-wrap {
+   bottom:0;
+   width:100%;
+   left:0;
+   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.3);
+}
+.app-btn-wrap .app-tab-btn {
+   margin:0;
+   height:60px;
+   width:100%;
+   --border-radius:0;
+   font-size:16px;
+}
+.app-btn-wrap.half .app-tab-btn {
+   width:50%;
 }

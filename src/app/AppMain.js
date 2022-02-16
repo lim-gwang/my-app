@@ -26,7 +26,7 @@ const menuTitle = appMenuTree.depth1[0].depth2.map(menu => menu.title);
 function AppMain() {
    return (
       <IonPage className="ion-page">
-         {/* <IonContent scrollY={true}> */}
+         <IonContent scrollY={false} >
             <IonRouterOutlet>
                <Route path={subRouterPath.page1} exact={true}>
                   <CsList title={menuTitle[0]}/>
@@ -40,7 +40,8 @@ function AppMain() {
                <Route path={routePath.home} render={() => <Redirect to={subRouterPath.page1}/>} exact={true}/>
                <Route component={ExceptionPath} />
             </IonRouterOutlet>
-         {/* </IonContent> */}
+         </IonContent>
+
       </IonPage>
    )
 }

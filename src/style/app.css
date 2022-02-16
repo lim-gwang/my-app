@@ -1,8 +1,12 @@
 @import './common.css';
+@import './ionBtnStyle.css';
 
 .app-content {
    --padding-start: 20px;
    --padding-end: 20px;
    --padding-top: 20px;
-   --padding-bottom:20px;
+   
+}
+.tabBtn-wraper {
+   --padding-bottom:80px;
 }

@@ -15,11 +15,8 @@ import { routePath, subRouterPath } from '../router/router';
 // component
 import Header from '../commonComponent/header/Header';
 import SideMenu from '../commonComponent/sideMenu/SideMenu';
-import RegisterList from './registerList/RegisterList';
-import RegisterList2 from './testpage/RegisterList2';
 import Select from 'react-select';
-import ExceptionPath from '../pages/exceptionPath/ExceptionPath';
-import MyPage from './myPage/MyPage';
+import ExceptionPath from '../exceptionPath/ExceptionPath';
 
 
 const options = [
@@ -68,11 +65,20 @@ function Main() {
          <Header windowSize={windowSize.width} thisDeskTop={thisDeskTop}/> 
             <IonContent>
                   <IonRouterOutlet>
-                     <Route path={subRouterPath.page1} exact={true} render={ props => (
-                        <RegisterList windowSize={windowSize.width} thisDeskTop={thisDeskTop} {...props}/>
+                     <Route path={subRouterPath.page1} exact={true} render={ () => (
+                        <IonPage>
+                           <IonContent>
+                              <h1>page1</h1>
+                           </IonContent>
+                        </IonPage>
                      )}/>
-                     {/* <Route path='/home/menu1' component={RegisterList} exact={true}/> */}
-                     <Route path={subRouterPath.page2} component={RegisterList2} exact={true}/>
+                     <Route path={subRouterPath.page2} exact={true} render={ () => (
+                        <IonPage>
+                           <IonContent>
+                              <h1>page2</h1>
+                           </IonContent>
+                        </IonPage>
+                     )}/>
                      <Route path={routePath.home} render={() => <Redirect to={subRouterPath.page1}/>} exact={true}/>
                      <Route component={ExceptionPath} />
                   </IonRouterOutlet>

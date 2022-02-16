@@ -7,7 +7,7 @@ import {
  } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../../store/user/user';
+import { login } from '../store/user/user';
 import './login.css';
 
 const platforms = getPlatforms();
@@ -34,10 +34,10 @@ function Login() {
                // 로그인 성공 
                history.push('/home');
                // input 초기화
-               setLoginData({
-                  id:'',
-                  pw: ''
-               });
+               // setLoginData({
+               //    id:'',
+               //    pw: ''
+               // });
 
             } else {
                //로그인 실패
