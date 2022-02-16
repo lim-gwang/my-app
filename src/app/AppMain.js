@@ -13,7 +13,7 @@ import { routePath, subRouterPath, appMenuTree } from '../router/router';
 import Header from '../commonComponent/header/Header';
 import SideMenu from '../commonComponent/sideMenu/SideMenu';
 import CsList from './csList/CsList';
-import ExceptionPath from '../pages/exceptionPath/ExceptionPath';
+import ExceptionPath from '../exceptionPath/ExceptionPath';
 
 //css
 import '../style/app.css';

@@ -10,7 +10,9 @@ function RegisterTable({windowSize, thisDeskTop}) {
       hide:false,
       id: null,
    });
+   
    const stateItems = useSelector(state => state.itemReducer.items);
+
    const tableList = stateItems.map((item, index) => (
       <tr key={index}>
          <td>
@@ -56,13 +58,13 @@ function RegisterTable({windowSize, thisDeskTop}) {
          </td>
       </tr>
    ));
+
    const itemView = id => {
       setModalData({
          hide:true,
          id
       })
    };
-
 
    const PcConents = () => (
       <table className='table list-table'>
@@ -159,6 +161,7 @@ function RegisterTable({windowSize, thisDeskTop}) {
          id: null,
       });
    }
+
    return(
       <>
          <article className='register-body'>
