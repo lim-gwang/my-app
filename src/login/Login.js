@@ -30,6 +30,7 @@ function Login() {
    const SubmitLogin = () => {
       login(loginData)
          .then(res=> {
+            console.log(res)
             if(res.token) {
                // 로그인 성공 
                history.push('/home');
