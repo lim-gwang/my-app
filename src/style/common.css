@@ -31,6 +31,8 @@ button,input,optgroup,pre,select,textarea{color:inherit;margin:0}
    background-color:#c6d3e0 !important;
 }
 
+
+
 .sc-ion-input-md-h {
    font-size:1.4rem;
    --padding-top: 1rem;
@@ -69,18 +71,35 @@ textarea {
    background-color:#fff;
 }
 
+select {
+   background-image: url(../images/common/btn__more.png);
+   background-size:auto;
+   background-position: right 10px center;
+   background-repeat:no-repeat;
+   appearance: none;
+}
+/*------------------------------------*\
+  input date
+\*------------------------------------*/
 input[type='date'] {
-   background-color:#1776e1 !important;
-   color:#fff !important;
-   border-radius:0 !important;
-   padding:.5rem 1rem !important;;
+   font-size:14px;
+   color: #999999;
+   border-radius:3px;
+   border: 1px solid #b5b5c3;
+   padding:10px 12px !important;;
+}
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    /* display: none; */
+    opacity:0;
+    -webkit-appearance: none;
 }
 input[type="date" i] {
-   color:#333;
+   /* color:#333; */
    background-image:url(../images/common/btn-calendar.png);
    background-size:auto;
    background-repeat:no-repeat;
-   background-position: center;
+   background-position: right 10px bottom 50%;
 }
 textarea::placeholder,
 input::placeholder {
@@ -286,3 +305,15 @@ select {
     #header, aside, #footer {display:none!important;}
     .container {width:100%!important;zoom:.6;}  
   }
+/*------------------------------------*\
+   @media
+\*------------------------------------*/
+@media (max-width:400px) {
+   /*------------------------------------*\
+   input date
+   \*------------------------------------*/
+   input[type='date'] {
+      font-size:13px;
+      padding:10px 8px !important;;
+   }
+}

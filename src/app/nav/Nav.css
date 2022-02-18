@@ -41,6 +41,10 @@
    background-color:#1776E1;
    border-radius:100%;
    z-index:2;
+   background-image: url(../../images/app/nav-icon.png);
+   background-size: auto;
+   background-position:center;
+   background-repeat:no-repeat;
 }
 .fix-nav > .nav-link {
    position:absolute;

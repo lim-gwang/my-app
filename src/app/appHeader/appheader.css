@@ -1,1 +1,5 @@
-.ion-no-border .in-toolbar {height:56px;}
+.backBtn {
+   padding-left:24px;
+   font-size:16px !important;
+   background:url(../../images/app/btn_back.png) left 0 center / auto no-repeat;
+}

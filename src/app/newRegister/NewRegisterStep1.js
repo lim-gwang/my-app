@@ -1,45 +1,43 @@
+import React from 'react';
 import { 
    IonPage,
    IonContent,
-   IonHeader,
-   IonToolbar,
-   IonButtons,
-   IonBackButton,
-   IonTitle,
-   IonRouterOutlet,
    IonButton
 } from '@ionic/react';  
 import { Redirect, Route } from 'react-router-dom'; 
-import React from 'react';
 
-import { subRouterPath } from '../../router/router';
+// router url
+import { appMenuTree } from '../../router/router';
+
+// component
 import AppHeader from '../appHeader/AppHeader';
-function NewRegisterStep1({title}) {
-   return (
-       <IonPage>
-         {/* <IonContent scrollY={true}> */}
+import RegisterDevice from '../component/RegisterDevice';
+
+function NewRegister({title, disabled}) {
+
+   return(
+      <IonPage>
          <AppHeader title={title}/>
-            <IonContent class='app-content tabBtn-wraper'>
-               <h1>
-                  steop2. 부품추가 
-               </h1>
-               <div slot='fixed' className='app-btn-wrap half'>
-                  <IonButton 
-                     class='app-tab-btn ion-color-tab-back' 
-                     color='ion-color-tab-back'
-                     routerDirection='back' 
-                     routerLink='/home/menu2'
-                  >
-                     이전
-                  </IonButton>
-                  <IonButton class='app-tab-btn' routerLink='/home/menu2/step3'>
-                     다음
-                  </IonButton>
-               </div>
-            </IonContent>
-         {/* </IonContent> */}
+         <IonContent 
+            class='app-content tabBtn-wraper'
+            scrollY={true}
+            scrollEvents={true}
+            onIonScrollStart={() => {}}
+            onIonScroll={() => {}}
+            onIonScrollEnd={() => {}}
+         >
+            <h2 className='list-title' style={{color: '#1776e1'}}>
+               <span>STEP1.</span> CS 요청 정보 입력
+            </h2>
+           <RegisterDevice/>
+           <div slot='fixed' className='app-btn-wrap'>
+               <IonButton class='app-tab-btn' routerLink='/home/menu2/step2'>
+                  다음
+               </IonButton>
+            </div>
+         </IonContent>
       </IonPage>
    )
-};
+}
 
-export default NewRegisterStep1;
+export default NewRegister;

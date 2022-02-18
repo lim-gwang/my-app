@@ -2,9 +2,9 @@ import axios from 'axios';
 import { addList, delList } from '../actions/actions';
 import { 
    LOGIN,
-   USER_DATA
+   USER_DATA,
+   CS_LIST
  } from '../../API/apiUrl';
-
 
 // 로그인
 export const login = ({id, pw}) => {
@@ -17,6 +17,7 @@ export const login = ({id, pw}) => {
          const message = res.data.Message;
          const token = res.data.IdentityCode;
          sessionStorage.setItem('token', token);
+
          return  {
             message,
             token
@@ -29,18 +30,39 @@ export const logout = () => {
 }
 
 // 유저 정보
-const userData = async () => {
-
-    const items = await axios.get(USER_DATA, {
+export const userData = async () => {
+   const items = await axios.get(USER_DATA, { 
       headers: {
-         jwttoken: sessionStorage.getItem('jwttoken')
+         jwttoken: sessionStorage.getItem('token')
       }
    })
-   .then(res => res);
-      
+   .then(res=> res.data.List);
+
    return items;
 };
-  
+
+// cs 요청 목록
+const _csList = async () => {
+   const list = await axios.get(CS_LIST, { 
+      headers: {
+         jwttoken: sessionStorage.getItem('token')
+      }
+   });
+
+   return list;
+};
+
+export const csList = () => {
+   _csList()
+      .then(res=> console.log(res.data, 'cslist'))
+}
+
+// export const fetchCsList = (dispatch, getState) => {
+//    csList()
+//       .then(list=> {
+//          dispatch(addList(list))
+//       });
+// }
 
 // // CS 삭제
 // const _delData = id => {

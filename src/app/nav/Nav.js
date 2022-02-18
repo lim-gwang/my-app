@@ -19,9 +19,7 @@ function Nav() {
 
    return (
       <div className='fix-nav'>
-         <button onClick={toggleNav}>
-            이미지!
-         </button>
+         <button onClick={toggleNav}></button>
          <div className={open ? 'nav-link open' : 'nav-link'}>
             <IonButton
                class='ion-color-nav'

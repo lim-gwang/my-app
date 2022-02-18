@@ -1,12 +1,63 @@
 @import './common.css';
 @import './ionBtnStyle.css';
 
+.list-title {
+   margin-bottom:20px;
+}
+
+.ion-no-border .in-toolbar {
+   --padding-top: none;
+   --padding-bottom: none;
+   height: 56px;
+}
+.ion-no-border  ion-toolbar.in-toolbar {
+   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
+}
 .app-content {
    --padding-start: 20px;
    --padding-end: 20px;
    --padding-top: 20px;
+   --background: #f7f9fb;
    
 }
 .tabBtn-wraper {
    --padding-bottom:80px;
+}
+
+input[type='date'] {
+   /* width:160px; */
+   letter-spacing: -1px;
+}
+
+.form-section > article:not(.form-body) {
+   padding: 20px;
+   border-radius: 10px;
+   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+   background-color: #fff;
+}
+select,input,textarea {
+   font-size:14px;
+   padding:10px 15px;
+   color:#333;
+   background-color:#fff;
+   width:100%;
+}
+input:-webkit-autofill, 
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active { 
+   -webkit-text-fill-color: #333 !important;
+   transition: background-color 5000s ease-in-out 0s; 
+   -webkit-transition: background-color 9999s ease-out;
+   -webkit-box-shadow: 0 0 0px 1000px #fff inset !important; 
+}
+
+textarea {
+   overflow-x:hidden;
+}
+select::placeholder,
+input::placeholder,
+textarea::placeholder {
+   color:#999;
+   padding:0;
 }

@@ -52,52 +52,62 @@ function Header({windowSize, thisDeskTop}) {
     }
 
    return(
-      <>
-         <IonHeader>
-            <IonToolbar>
-               <IonButtons slot="start">
-                  <IonMenuToggle>
-                     <IonButton>
-                        <IonIcon icon={menu} style={{color:"#333"}}/>
-                     </IonButton>
-                  </IonMenuToggle>
-               </IonButtons>
-               <div className='header-layout dis-flex'>
+      <IonHeader className={thisDeskTop ? '' : 'ion-no-border'}>
+         <IonToolbar>
+            <IonButtons slot="start">
+               <IonMenuToggle>
+                  <IonButton>
+                     <IonIcon icon={menu} style={{color:"#333"}}/>
+                  </IonButton>
+               </IonMenuToggle>
+            </IonButtons>
+            <div className='header-layout dis-flex' style={thisDeskTop ? {} : {justifyContent: 'center'}}>
+               {thisDeskTop ? (
                   <h1 className='logo' style={{width: '118px'}}>
-                     <img src="https://classys.com/wp-content/uploads/2018/09/clsaays_logo2.png" alt="classys"/>
+                  <img src="https://classys.com/wp-content/uploads/2018/09/clsaays_logo2.png" alt="classys"/>
                   </h1>
-                  {windowSize > 1024 && thisDeskTop ? (
-                     <div className='menus header-layout__menus dis-flex'>
-                      <ul className='route-list menus__route-list dis-flex'>
-                         {menus}
-                      </ul>
-                      <ul className='userMenu-list menus__userMenu-list dis-flex'>
-                         <li>
-                            <NavLink to='/home/myPage' 
-                               className='ion-color-header-menu' 
-                               activeStyle={{color:'#1776E1'}}
-                            >
-                               마이페이지
-                            </NavLink>
-                         </li>
-                         <li>
-                            <button 
-                               className='ion-color-header-menu' 
-                               onClick={()=> logoutAction()}
-                            >
-                               로그아웃
-                            </button>
-                         </li>
-                      </ul>
-                   </div>
-                  ) : (
-                     <></>
-                  )}
-                 
-               </div>
-            </IonToolbar>
-         </IonHeader>
-      </>
+               ):(
+                  <strong
+                     style={{
+                        fontSize: '18px',
+                        color:'#000',
+                     }}
+                  >
+                     CS 관리
+                  </strong>
+               )}
+               
+               {windowSize > 1024 && thisDeskTop ? (
+                  <div className='menus header-layout__menus dis-flex'>
+                     <ul className='route-list menus__route-list dis-flex'>
+                        {menus}
+                     </ul>
+                     <ul className='userMenu-list menus__userMenu-list dis-flex'>
+                        <li>
+                           <NavLink to='/home/myPage' 
+                              className='ion-color-header-menu' 
+                              activeStyle={{color:'#1776E1'}}
+                           >
+                              마이페이지
+                           </NavLink>
+                        </li>
+                        <li>
+                           <button 
+                              className='ion-color-header-menu' 
+                              onClick={()=> logoutAction()}
+                           >
+                              로그아웃
+                           </button>
+                        </li>
+                     </ul>
+                  </div>
+               ) : (
+                  <></>
+               )}
+               
+            </div>
+         </IonToolbar>
+      </IonHeader>
    )
 }
 

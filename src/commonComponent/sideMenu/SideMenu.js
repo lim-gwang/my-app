@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
    IonContent,
    IonMenu,
@@ -10,8 +10,8 @@ import {
 import { IonReactRouter  } from '@ionic/react-router';
 import { useHistory, NavLink } from 'react-router-dom'; 
 
-// function
-import { logout } from '../../store/user/user';
+// action
+import { logout, userData } from '../../store/user/user';
 
 // router url 
 import { appMenuTree } from '../../router/router';
@@ -22,6 +22,23 @@ import './sideMenu.css';
 
 function SideMenu () {
    const history = useHistory();
+   const [ user, setUser ] = useState({
+      Country: null,
+      CustIdentity: null,
+      DisplayName: null,
+      Foreign: null,
+      Grant: null,
+      IP: null,
+      LoginID: null,
+      SubCustIdentity: null
+   });
+   useEffect(()=> {
+      userData().then(res=>{
+         setUser({
+            ...res
+         })
+      });
+   }, []);
 
    const menus = appMenuTree.depth1[0].depth2.map((menu, index) => (
       <li key={index}>
@@ -45,7 +62,7 @@ function SideMenu () {
          <IonHeader>
             <div className='sideMenu-header'>
                <strong>
-                  홍길동
+                  {user.LoginID}
                   <span>
                      님 
                   </span>

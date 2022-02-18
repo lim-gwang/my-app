@@ -12,6 +12,9 @@ import { debounce } from 'lodash';
 // router url
 import { routePath, subRouterPath } from '../router/router';
 
+//action
+import { userData } from '../store/user/user';
+
 // component
 import Header from '../commonComponent/header/Header';
 import SideMenu from '../commonComponent/sideMenu/SideMenu';
@@ -38,10 +41,11 @@ export const com = () => (
 // destTop check
 const platforms = getPlatforms();
 const thisDeskTop = platforms.map(arg => arg === 'desktop')[0];
+// 권한 체크
+let grant = null;
 
 function Main() {
    const history = useHistory();
-
    // window width check
    const [ windowSize, setWindowSize ] = useState({
       width: window.innerWidth
@@ -58,6 +62,7 @@ function Main() {
          window.removeEventListener('resize', handleResize);
       }
    }, []);
+
    return(
       <>
          <SideMenu/>   

@@ -27,19 +27,14 @@ function Login() {
          [key] : e.target.value
       })
    };
+
    const SubmitLogin = () => {
       login(loginData)
          .then(res=> {
-            console.log(res)
             if(res.token) {
                // 로그인 성공 
                history.push('/home');
                // input 초기화
-               // setLoginData({
-               //    id:'',
-               //    pw: ''
-               // });
-
             } else {
                //로그인 실패
                alert(res.message);
@@ -51,8 +46,12 @@ function Login() {
          });
    }
    const enterLogin = e => {
-      if (e.key !== 'Enter') return;
+      // if (e.key !== 'Enter') return;
       SubmitLogin();
+      setLoginData({
+         id: '',
+         pw: ''
+      });
    }
 
    return (
@@ -77,15 +76,16 @@ function Login() {
                            type='password' 
                            value={loginData.pw}
                            onChange={handleChange('pw')}
-                           onKeyUp={enterLogin}
+                           // onKeyUp={enterLogin}
                            placeholder='비밀번호'
                         />
                      </article>
                      <IonButton
-                        className='btn ion-color-login'
+                        class='btn ion-color-login'
                         color='ion-color-login'
                         routerDirection="forward"
                         expand="full"
+                        onTouchEnd={() => SubmitLogin()}
                         onClick={() => SubmitLogin()}
                      >
                         로그인

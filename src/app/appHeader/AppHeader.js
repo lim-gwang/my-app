@@ -15,7 +15,7 @@ function AppHeader({title}) {
       <IonHeader mode='ios' className="ion-no-border">
          <IonToolbar>
             <IonButtons slot="start">
-               <IonButton routerDirection='back' routerLink='/home'>
+               <IonButton class='backBtn' routerDirection='back' routerLink='/home'>
                   CS 관리
                </IonButton>
             </IonButtons>
