@@ -1,13 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
    IonButton
 } from '@ionic/react'; 
 
+import { useSelector, useDispatch } from 'react-redux';
 
-//css 
+// css 
 import './Register.css';
 
+// action
+import { getDevice} from '../../store/registeCategory/registeCategory';
+
+
+const deviceSelector = state => state.deviceReducer;
+
 function RegisterDevice({disabled}) {
+   const dispatch = useDispatch();
+   const deviceList = useSelector(deviceSelector);
+   const [ forms, setForms] = useState({
+
+   });
+
+   // 장비 목록
+   const getDeviceList = deviceList.device.map((arg, index)=> {
+      return (
+         <option value={arg.CodeName} key={index}>
+            {arg.CodeName}
+         </option>
+      )
+   });
+
+
+   
+   
    return(
       <>
       <section className='form-section'>
@@ -18,12 +43,7 @@ function RegisterDevice({disabled}) {
                <span>*</span>
             </label>
             <select id='device' disabled={disabled}>
-               <option value=''>
-                  장비
-               </option>
-               <option value='1'>
-                  1
-               </option>
+              {getDeviceList}
             </select>
          </div>
          <div className='custom-forms'>

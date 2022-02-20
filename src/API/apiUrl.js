@@ -2,3 +2,15 @@ const url = 'http://kr.hslens.com:14987';
 export const LOGIN = url+'/api/User/Login';
 export const USER_DATA = url+'/api/User/SessionTest';
 export const CS_LIST = url+'/api/CS/Gets';
+
+
+// 장비 종류
+export const DEVICE = url+'/api/Code/Device';
+// 부품종류
+export const DEVICE_PART = url+'/api/Code/DevicePart';
+// CS 증상코드
+export const CS_REASON = url+'/api/Code/CSReason';
+// 배송방법
+export const SHIPPING = url+'/api/Code/Shipping';
+// 배송
+export const SHIPMENT = url+'/api/Code/Shipment';

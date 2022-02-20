@@ -7,15 +7,23 @@ import {
  } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../store/user/user';
+//css
 import './login.css';
+
+//action 
+import { login } from '../store/user/user';
+import { userData } from '../store/actions/actions';
+
+// component
+import Loading from '../loading/Loding';
 
 const platforms = getPlatforms();
 const thisDeskTop = platforms.map(arg => arg === 'desktop')[0];
 
 function Login() {
+   const token = sessionStorage.getItem('token');
    const history = useHistory();
-   const dispatch = useDispatch();
+   const [ loading, setLoading ] = useState(false);
    const [ loginData, setLoginData ] = useState({
       id: '',
       pw: ''
@@ -28,35 +36,49 @@ function Login() {
       })
    };
 
-   const SubmitLogin = () => {
-      login(loginData)
-         .then(res=> {
-            if(res.token) {
-               // 로그인 성공 
-               history.push('/home');
-               // input 초기화
-            } else {
-               //로그인 실패
-               alert(res.message);
-            }
-         })
-         .catch(err => {
-            // 로그인 실패 시
-            console.log(err)
-         });
+   const SubmitLogin = async () => {
+
+      try {
+         setLoading(true);
+
+         await login(loginData)
+            .then(res=> {
+               if(res.token) {
+                  // 로그인 성공 
+                  history.push('/home');
+                  setLoginData({
+                     id: '',
+                     pw: ''
+                  });
+               };
+            })
+            .catch(err=> {
+               console.log(err)
+            });
+
+      } catch (err) {
+         console.log(err);
+      }
+
+      setLoading(false);
    }
+
    const enterLogin = e => {
-      // if (e.key !== 'Enter') return;
+      if (e.key !== 'Enter') return;
+
       SubmitLogin();
-      setLoginData({
-         id: '',
-         pw: ''
-      });
+   }
+
+   // token값이 있다면 main 페이지로 이동
+   if(token) {
+      window.location.href = '/home';
    }
 
    return (
+      
       <IonPage >
          <IonContent fullscreen='true' className='no-scroll'>
+            <Loading hide={loading}/>
             <main id="login">
                <div className='logo-title login__logo-title'>
                   <img src="https://classys.com/wp-content/uploads/2018/09/clsaays_logo2.png" className='logo' />
@@ -76,7 +98,7 @@ function Login() {
                            type='password' 
                            value={loginData.pw}
                            onChange={handleChange('pw')}
-                           // onKeyUp={enterLogin}
+                           onKeyUp={enterLogin}
                            placeholder='비밀번호'
                         />
                      </article>

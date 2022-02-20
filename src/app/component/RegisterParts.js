@@ -10,9 +10,13 @@ import {
    chevronUpOutline, 
    addOutline 
 } from 'ionicons/icons';
+import { useSelector, useDispatch } from 'react-redux';
 
 //css 
 import './Register.css';
+
+// action
+import { getDevice} from '../../store/registeCategory/registeCategory';
 
 function RegisterParts({disabled}) {
    return(

@@ -13,7 +13,7 @@ import { appMenuTree } from '../../router/router';
 import AppHeader from '../appHeader/AppHeader';
 import RegisterDevice from '../component/RegisterDevice';
 
-function NewRegister({title, disabled}) {
+function NewRegister({title}) {
 
    return(
       <IonPage>

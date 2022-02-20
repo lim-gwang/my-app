@@ -9,9 +9,10 @@ import {
 } from '@ionic/react';  
 import { IonReactRouter  } from '@ionic/react-router';
 import { useHistory, NavLink } from 'react-router-dom'; 
+import { useDispatch, useSelector } from 'react-redux';
 
 // action
-import { logout, userData } from '../../store/user/user';
+import { logout, fetchUserData } from '../../store/user/user';
 
 // router url 
 import { appMenuTree } from '../../router/router';
@@ -19,25 +20,19 @@ import { appMenuTree } from '../../router/router';
 //css
 import './sideMenu.css';
 
-
 function SideMenu () {
+   const dispatch = useDispatch();
    const history = useHistory();
-   const [ user, setUser ] = useState({
-      Country: null,
-      CustIdentity: null,
-      DisplayName: null,
-      Foreign: null,
-      Grant: null,
-      IP: null,
-      LoginID: null,
-      SubCustIdentity: null
-   });
+   const user_data = useSelector(state => state.itemReducer.user);
+   /* 
+      loginID : 유저 아이디
+      Grant : 유저 권한 (8 : 관리자, 그 외 일반사용자)
+   */
+   const { LoginID, Grant } = user_data;
+
    useEffect(()=> {
-      userData().then(res=>{
-         setUser({
-            ...res
-         })
-      });
+      dispatch(fetchUserData);
+      
    }, []);
 
    const menus = appMenuTree.depth1[0].depth2.map((menu, index) => (
@@ -62,7 +57,7 @@ function SideMenu () {
          <IonHeader>
             <div className='sideMenu-header'>
                <strong>
-                  {user.LoginID}
+                  {LoginID}
                   <span>
                      님 
                   </span>

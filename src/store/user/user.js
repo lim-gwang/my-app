@@ -1,10 +1,21 @@
 import axios from 'axios';
-import { addList, delList } from '../actions/actions';
+import { 
+   userData, 
+   addList, 
+   delList 
+} from '../actions/actions';
+
 import { 
    LOGIN,
    USER_DATA,
    CS_LIST
  } from '../../API/apiUrl';
+
+let headersToken = () => ({
+   headers: {
+      jwttoken: sessionStorage.getItem('token')
+   }
+});
 
 // 로그인
 export const login = ({id, pw}) => {
@@ -30,24 +41,23 @@ export const logout = () => {
 }
 
 // 유저 정보
-export const userData = async () => {
-   const items = await axios.get(USER_DATA, { 
-      headers: {
-         jwttoken: sessionStorage.getItem('token')
-      }
-   })
+const _userData = async () => {
+   const items = await axios.get(USER_DATA, headersToken())
    .then(res=> res.data.List);
 
    return items;
 };
 
+export const fetchUserData = (dispatch, getState) => {
+   _userData()
+      .then(items=> {
+         dispatch(userData(items))
+      });
+}
+
 // cs 요청 목록
 const _csList = async () => {
-   const list = await axios.get(CS_LIST, { 
-      headers: {
-         jwttoken: sessionStorage.getItem('token')
-      }
-   });
+   const list = await axios.get(CS_LIST, headersToken());
 
    return list;
 };

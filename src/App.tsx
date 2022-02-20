@@ -47,8 +47,8 @@ setupIonicReact();
 const platforms = getPlatforms();
 const thisDeskTop = platforms.map(arg => arg === 'desktop')[0];
 
-
 const App = () => {
+   const token = sessionStorage.getItem('token');
    const itemSelector = (state) => state.itemReducer.items;
    const dispatch = useDispatch();
 
@@ -58,9 +58,9 @@ const App = () => {
 
    const userItem = useSelector(itemSelector);
 
-   
 
    let mainPage = null;
+
 
    if(thisDeskTop) {
       // web

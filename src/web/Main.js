@@ -45,7 +45,9 @@ const thisDeskTop = platforms.map(arg => arg === 'desktop')[0];
 let grant = null;
 
 function Main() {
+   const token = sessionStorage.getItem('token');
    const history = useHistory();
+
    // window width check
    const [ windowSize, setWindowSize ] = useState({
       width: window.innerWidth
@@ -62,6 +64,10 @@ function Main() {
          window.removeEventListener('resize', handleResize);
       }
    }, []);
+
+   if(!token) {
+      window.location.href = '/login';
+   }
 
    return(
       <>
