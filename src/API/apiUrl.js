@@ -3,6 +3,8 @@ export const LOGIN = url+'/api/User/Login';
 export const USER_DATA = url+'/api/User/SessionTest';
 export const CS_LIST = url+'/api/CS/Gets';
 
+// CS 요청 저장 및 수정 
+export const ADD_CS_LIST = url+'/api/CS/Put';
 
 // 장비 종류
 export const DEVICE = url+'/api/Code/Device';

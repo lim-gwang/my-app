@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
-import { itemReducer, deviceReducer } from './actions/actions';
+import { itemReducer, deviceReducer, CSListReducer } from './actions/actions';
 
 const rootReducer = combineReducers({
     itemReducer,
-    deviceReducer
+    deviceReducer,
+    CSListReducer
 });
 
 export default rootReducer;

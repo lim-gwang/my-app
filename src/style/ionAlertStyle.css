@@ -1,0 +1,62 @@
+.custom-alert-modal .alert-wrapper {
+   width:90%;
+   max-width:360px;
+}
+.custom-alert-modal .alert-head {
+   padding-top: 80px;
+   position:relative;
+   text-align:center;
+   background:url(../images/common/alert_symbol.png) top 20px center / auto no-repeat;
+}
+.custom-alert-modal .alert-message {
+   font-size:13px;
+   padding-bottom:24px;
+   text-align:center;
+   color:#999;
+   letter-spacing: -.5px;
+}
+
+.custom-alert-modal .alert-button-group {
+   justify-content: center !important;
+   gap: 20px;
+   padding: 0 40px 25px;
+}
+.custom-alert-modal .alert-button {
+   min-width:auto;
+   margin:0;
+   width:45%;
+   max-width:130px;
+   height:50px;
+   border-radius:3px;
+   text-align:center;
+   line-height:50px;
+   border-width:1px;
+   border-style:solid;
+   font-size:14px;
+   letter-spacing: -.5px;
+}
+.custom-alert-modal .alert-button > .alert-button-inner {
+   justify-content: center !important;
+}
+.custom-alert-modal .alert-button:first-child {
+   color:#fff;
+   background-color: #1776e1;
+   border-color:#1776e1;
+}
+
+.custom-alert-modal .alert-button:last-child {
+   color:#1776e1;
+   border-color:#999999;
+   border-right: 1px solid #999999 !important;
+}
+.custom-alert-modal.back .alert-button:last-child {
+   color:#fe3535;
+}
+
+.custom-alert-modal.err .alert-button {
+   background: #fff;
+   border-color: #fe3535;
+   color: #fe3535;
+   width: 100%;
+   height: 45px;
+}

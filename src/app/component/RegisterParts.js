@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
    IonButton,
-   IonIcon 
+   IonIcon,
+   IonAlert,
 } from '@ionic/react'; 
 
 // ionicon
@@ -11,96 +12,271 @@ import {
    addOutline 
 } from 'ionicons/icons';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation, useHistory } from 'react-router';
 
 //css 
 import './Register.css';
 
 // action
-import { getDevice} from '../../store/registeCategory/registeCategory';
+import { 
+   addCsPart, 
+   delCsPart, 
+   csPartToggle,
+   csRemoveToggle,
+} from '../../store/actions/actions';
+
+
+const partSelector = state => state.deviceReducer;
+const csListSelector = state => state.CSListReducer;
 
 function RegisterParts({disabled}) {
+   const dispatch = useDispatch();
+   const history = useHistory();
+   const partList = useSelector(partSelector);
+   const csList = useSelector(csListSelector);
+   const location = useLocation().pathname;
+   const [showAlert2, setShowAlert2] = useState(false);
+   const [ parts, setParts ] = useState([
+      ...csList.Details,
+   ]);
+   // CS 증상코드
+   const getCsReasonList = partList.csReason.map((arg, index) => (
+      <option value={arg.Code} key={index}>
+         {arg.CodeName}
+      </option>
+   ));
+   // 배송방법
+   const getShippingList = partList.shipping.map((arg, index)=> (
+      <option value={arg.Code} key={index}>
+         {arg.CodeName}
+      </option>
+   ));
+   // 배송
+   const getShipment = partList.shipment.map((arg, index)=> (
+      <option value={arg.Code} key={index}>
+         {arg.CodeName}
+      </option>
+   ));
+
+   useEffect(()=>{
+      setParts([
+         ...csList.Details
+      ])
+     
+   }, [csList]);
+
+   const onHandleChange = (index, name) => e => {   
+      setParts(state => {
+         state[index][name] = e.target.value
+         return [...state]
+      });
+
+   }
+
+   const formCheck = () => {
+      let check = true;
+      for (let i = 0; i < parts.length; i++) {
+         if((parts[i].Product && parts[i].ReasonID && parts[i].ShipmentID && parts[i].RMemo) == false) {
+            setShowAlert2(true);
+            check = false;
+            break;
+         }
+      };
+      
+      if(check) {
+         dispatch(csRemoveToggle());
+         history.push('/home/menu2/step3');
+      }
+   }
+
    return(
       <>
          <section className='form-section'>
             <article className='summary-length-form'>
-               Summary <span>2 Items</span>
+               Summary <span>{csList.Details.length} Items</span>
             </article>
-            <article className='parts-form'>
-               <button>
-                  <strong>
-                     Item No.<span>1</span>
-                  </strong>
-                  <div>
-                     <IonButton 
-                        class='ion-color-remove-item'
-                        color='ion-color-remove-item'
-                     >
-                        <IonIcon icon={removeOutline}/>
-                     </IonButton>
-                     <span className='toggle-area'>
-                        <IonIcon icon={chevronUpOutline}/>
-                     </span>
-                  </div>
-               </button>
-               <div className='parts-body'>
-                  <div className="custom-forms">
-                     <label htmlFor="parts">
-                        부품<span>*</span>
-                     </label>
-                     <select id="device" disabled={disabled}>
-                        <option value="">부품</option>
-                        <option value="1">1</option>
-                     </select>
-                  </div>
-                  <div className="custom-forms">
-                     <label htmlFor="parts">
-                        부품시리얼번호
-                     </label>
-                     <input type='text' disabled={disabled} placeholder='부품시리얼번호'/>
-                  </div>
-               <div className="custom-forms">
-                     <label htmlFor="parts">
-                        증상<span>*</span>
-                     </label>
-                     <select id="device" disabled={disabled}>
-                        <option value="">증상</option>
-                        <option value="1">1</option>
-                     </select>
-                  </div>
-                  <div className="custom-forms">
-                     <label htmlFor="parts">
-                        배송
-                     </label>
-                     <select id="device" disabled={disabled}>
-                        <option value="">아니오/1:1교환/...</option>
-                        <option value="1">1</option>
-                     </select>
-                  </div>
-                  <div className="custom-forms">
-                     <label htmlFor="parts">
-                        배송방법<span>*</span>
-                     </label>
-                     <select id="device" disabled={disabled}>
-                        <option value="">배송방법</option>
-                        <option value="1">1</option>
-                     </select>
-                  </div>
-                  <div className="custom-forms">
-                     <label htmlFor="parts">
-                        배송방법<span>*</span>
-                     </label>
-                     <input type='text' disabled={disabled} placeholder='운송장번호'/>
-                  </div>
-                  <div className="custom-forms">
-                     <label htmlFor="parts">
-                        요청사항<span>*</span>
-                     </label>
-                     <textarea disabled={disabled} placeholder='요청사항을 입력하세요'/>
-                  </div>
-               </div>
-            </article>
+            {
+               parts.map((arg, index)=> (
+                  <article 
+                     key={index}
+                     className={arg.toggle ? 'parts-form active' : 'parts-form'} 
+                     style={{marginBottom: '20px'}}
+                  >
+                     <button onClick={() => dispatch(csPartToggle(index))}>
+                        <strong>
+                           Item No.<span>{index + 1}</span>
+                        </strong>
+                        <div>
+                           {
+                              location !== '/home/menu2/step3' ? (
+                                 <IonButton 
+                                    class='ion-color-remove-item'
+                                    color='ion-color-remove-item'
+                                    onClick={ (e)=>  {
+                                       e.stopPropagation();
+                                       dispatch(delCsPart(index));
+                                    }}
+                                 >
+                                    <IonIcon icon={removeOutline}/>
+                                 </IonButton>
+                              ) : (
+                                 <></>
+                              )
+                           }
+                           <span className='toggle-area'>
+                              <IonIcon icon={chevronUpOutline}/>
+                           </span>
+                        </div>
+                     </button>
+                     <div className='parts-body'>
+                        <div className="custom-forms">
+                           <label htmlFor={`Product${index}`}>
+                              부품<span>*</span>
+                           </label>
+                           <select
+                              id={`Product${index}`}
+                              disabled={disabled}
+                              value={arg.Product || ''}
+                              onChange={onHandleChange(index, 'Product')}
+                           >
+                              <option value=''>
+                                 선택해주세요.
+                              </option>
+                              <option value="1">1</option>
+                           </select>
+                        </div>
+                        <div className="custom-forms">
+                           <label htmlFor={`SerialNo${index}`}>
+                              부품시리얼번호
+                           </label>
+                           <input 
+                              id={`SerialNo${index}`}
+                              type='text' 
+                              value={arg.SerialNo}
+                              disabled={disabled}
+                              onChange={onHandleChange(index, 'SerialNo')}
+                              placeholder='부품시리얼번호'
+                            />
+                        </div>
+                        <div className="custom-forms">
+                           <label htmlFor={`ReasonID${index}`}>
+                              증상<span>*</span>
+                           </label>
+                           <select 
+                              id={`ReasonID${index}`}
+                              value={arg.ReasonID || ''}
+                              onChange={onHandleChange(index, 'ReasonID')}
+                              disabled={disabled}
+                           >
+                              <option value=''>
+                                 선택해주세요.
+                              </option>
+                              {getCsReasonList}
+                           </select>
+                        </div>
+                        <div className="custom-forms">
+                           <label htmlFor={`ShipmentID${index}`}>
+                              배송
+                           </label>
+                           <select 
+                              id={`ShipmentID${index}`}
+                              disabled={disabled}
+                              value={arg.ShipmentID || ''}
+                              onChange={onHandleChange(index, 'ShipmentID')}
+                           >
+                              <option value=''>
+                                 선택해주세요.
+                              </option>
+                              {getShipment}
+                           </select>
+                        </div>
+                        <div className="custom-forms">
+                           <label htmlFor={`ShippingID${index}`}>
+                              배송방법<span>*</span>
+                           </label>
+                           <select 
+                              id={`ShippingID${index}`}
+                              disabled={disabled}
+                              value={arg.ShippingID || ''}
+                              onChange={onHandleChange(index, 'ShippingID')}
+                           >
+                              <option value=''>
+                                 선택해주세요.
+                              </option>
+                              {getShippingList}
+                           </select>
+                        </div>
+                        <div className="custom-forms">
+                           <label htmlFor={`ShipCode${index}`}>
+                              운송장번호
+                           </label>
+                           <input 
+                              id={`ShipCode${index}`}
+                              type='text' 
+                              value={arg.ShipCode}
+                              disabled={disabled} 
+                              onChange={onHandleChange(index, 'ShipCode')}
+                              placeholder='운송장번호'
+                           />
+                        </div>
+                        <div className="custom-forms">
+                           <label htmlFor={`RMemo${index}`}>
+                              요청사항<span>*</span>
+                           </label>
+                           <textarea 
+                              id={`RMemo${index}`}
+                              disabled={disabled} 
+                              value={arg.RMemo}
+                              onChange={onHandleChange(index, 'RMemo')}
+                              placeholder='요청사항을 입력하세요'
+                           />
+                        </div>
+                     </div>
+                  </article>
+               ))
+            }
          </section>
-         
+         {
+            location === '/home/menu2/step2' ? (
+               <div className='part-area-add'>
+                  <IonButton
+                     class='ion-color-part-area-add'
+                     color='ion-color-part-area-add'
+                     onClick={()=> dispatch(addCsPart())}
+                  >
+                  <IonIcon icon={addOutline}/>
+                     ADD
+                  </IonButton>
+               </div>
+            ) : (
+               <></>
+            )
+         }
+         <IonAlert
+            isOpen={showAlert2}
+            onDidDismiss={() => setShowAlert2(false)}
+            cssClass='my-custom-class'
+            header={''}
+            subHeader={''}
+            message={'필수입력사항을 입력하지 않았습니다.'}
+            buttons={['확인']}
+         />
+         <div slot='fixed' className='app-btn-wrap half'>
+            <IonButton 
+               class='app-tab-btn ion-color-tab-back' 
+               color='ion-color-tab-back'
+               routerDirection='back' 
+               routerLink='/home/menu2'
+            >
+               이전
+            </IonButton>
+            <IonButton 
+               class='app-tab-btn' 
+               onClick={() => formCheck()}
+            >
+               다음
+            </IonButton>
+         </div>
       </>
    )
 }

@@ -100,6 +100,7 @@
    overflow:hidden;
    background-color:#1776E1;
    margin-left:15px;
+   transition: ease-out .3s;
 }
 .form-section .parts-form .toggle-area > ion-icon {
    position:absolute;
@@ -111,10 +112,25 @@
    font-size:20px;
 }
 .form-section .parts-form .parts-body { 
-   padding-top: 15px;
-   margin-top:20px;
    border-top: 1px solid #ECECEC;
+   height: 0;
+   transition: ease-out .3s;
+   overflow: hidden;
+   opacity: 0;
+   padding-top: 0;
+   margin-top: 0;
 }
+.form-section .parts-form.active .parts-body {
+   padding-top: 15px;
+   margin-top: 20px;
+   height: auto;
+   overflow: visible;
+   opacity: 1;
+}
+.form-section .parts-form.active .toggle-area {
+   transform:rotate(180deg);
+   -webkit-transform:rotate(180deg);
+} 
 .parts-body .custom-forms > textarea {
    height: 100px;
 }

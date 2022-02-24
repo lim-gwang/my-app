@@ -77,8 +77,8 @@ function Login() {
    return (
       
       <IonPage >
+         <Loading hide={loading}/>
          <IonContent fullscreen='true' className='no-scroll'>
-            <Loading hide={loading}/>
             <main id="login">
                <div className='logo-title login__logo-title'>
                   <img src="https://classys.com/wp-content/uploads/2018/09/clsaays_logo2.png" className='logo' />

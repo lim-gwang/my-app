@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
    IonPage,
    IonContent,
@@ -14,27 +14,32 @@ import AppHeader from '../appHeader/AppHeader';
 import RegisterDevice from '../component/RegisterDevice';
 
 function NewRegister({title}) {
+   const [ DeviceForm, setDeviceForms ] = useState({
+      AllowNew: true,
+      Code:"",
+      AgencyID: 1,
+      CustomerName:"",
+      ProductID:"",
+      SerialNo:"",
+      Rmemo:"",
+      Details: []
+   });
+
+   const deviceSave = name => e => {
+      setDeviceForms({
+         ...DeviceForm,
+         [name]: e.target.value,
+      });
+   }
 
    return(
       <IonPage>
          <AppHeader title={title}/>
-         <IonContent 
-            class='app-content tabBtn-wraper'
-            scrollY={true}
-            scrollEvents={true}
-            onIonScrollStart={() => {}}
-            onIonScroll={() => {}}
-            onIonScrollEnd={() => {}}
-         >
+         <IonContent class='app-content tabBtn-wraper'>
             <h2 className='list-title' style={{color: '#1776e1'}}>
                <span>STEP1.</span> CS 요청 정보 입력
             </h2>
-           <RegisterDevice/>
-           <div slot='fixed' className='app-btn-wrap'>
-               <IonButton class='app-tab-btn' routerLink='/home/menu2/step2'>
-                  다음
-               </IonButton>
-            </div>
+           <RegisterDevice deviceSave={deviceSave}/>
          </IonContent>
       </IonPage>
    )

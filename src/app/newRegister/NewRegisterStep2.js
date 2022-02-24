@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { 
    IonPage,
@@ -14,12 +14,30 @@ import {
 
 // router
 import { subRouterPath } from '../../router/router';
-
+// action 
+import { useDispatch, useSelector } from 'react-redux';
+import { addCsPart } from '../../store/actions/actions';
 // component
 import AppHeader from '../appHeader/AppHeader';
 import RegisterParts from '../component/RegisterParts';
 
 function NewRegisterStep1({title}) {
+   const dispatch = useDispatch();
+   const [ partForm, setPartForm ] = useState({
+      AllowNew:true,
+      Code:"",
+      Product:"",
+      SerialNo:"",
+      ReasonID:null,
+      ShipmentID:null,
+      ShippingID:null,
+      ShipCode:"",
+      RMemo:""
+   });
+   useEffect(()=> {
+
+   })
+
    return (
        <IonPage>
          <AppHeader title={title}/>
@@ -28,28 +46,6 @@ function NewRegisterStep1({title}) {
                   <span>STEP2.</span> 부품추가 
                </h1>
                <RegisterParts/>
-               <div className='part-area-add'>
-                  <IonButton
-                     class='ion-color-part-area-add'
-                     color='ion-color-part-area-add'
-                  >
-                     <IonIcon icon={addOutline}/>
-                     ADD
-                  </IonButton>
-               </div>
-               <div slot='fixed' className='app-btn-wrap half'>
-                  <IonButton 
-                     class='app-tab-btn ion-color-tab-back' 
-                     color='ion-color-tab-back'
-                     routerDirection='back' 
-                     routerLink='/home/menu2'
-                  >
-                     이전
-                  </IonButton>
-                  <IonButton class='app-tab-btn' routerLink='/home/menu2/step3'>
-                     다음
-                  </IonButton>
-               </div>
             </IonContent>
       </IonPage>
    )

@@ -8,7 +8,8 @@ import {
 import { 
    LOGIN,
    USER_DATA,
-   CS_LIST
+   CS_LIST,
+   ADD_CS_LIST,
  } from '../../API/apiUrl';
 
 let headersToken = () => ({
@@ -53,19 +54,48 @@ export const fetchUserData = (dispatch, getState) => {
       .then(items=> {
          dispatch(userData(items))
       });
-}
+};
 
 // cs 요청 목록
-const _csList = async () => {
-   const list = await axios.get(CS_LIST, headersToken());
+const _csList = async data  => {
+
+   let formData = new FormData();
+
+   for ( let key in data) {
+      formData.append(key, data[key]);
+   }
+
+   const list = await axios.post(CS_LIST, headersToken());
 
    return list;
 };
 
-export const csList = () => {
-   _csList()
-      .then(res=> console.log(res.data, 'cslist'))
-}
+export const csList = data => (dispatch, getState) => {
+   _csList(data)
+      .then(res=> {
+         console.log(res, 'cslist');
+         return res;
+      });
+};
+
+// cs 접수
+const _addCsList = async (data) => {
+
+   let formData = new FormData();
+
+   for ( let key in data) {
+      formData.append(key, data[key]);
+   }
+
+   const list = await axios.post(ADD_CS_LIST, formData, headersToken());
+
+   return list;
+};
+
+export const addCsList = data => {
+   return _addCsList(data)
+      .then(res=> res.data);
+};
 
 // export const fetchCsList = (dispatch, getState) => {
 //    csList()

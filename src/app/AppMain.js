@@ -15,7 +15,13 @@ import '../style/app.css';
 
 // action
 import { csList, userData } from '../store/user/user';
-import { getDevice} from '../store/registeCategory/registeCategory';
+import { 
+   getDevice,
+   // getDevicePart,
+   getCsReason,
+   getShipping,
+   getShipment
+} from '../store/registeCategory/registeCategory';
 
 // component
 import CsList from './csList/CsList';
@@ -28,6 +34,7 @@ const menuTitle = appMenuTree.depth1[0].depth2.map(menu => menu.title);
 
 function AppMain() {
    const token = sessionStorage.getItem('token');
+
    const dispatch = useDispatch();
    // token 값이 없으면 로그인 페이지로 이동 
    if(!token) {
@@ -35,7 +42,17 @@ function AppMain() {
    }
 
    useEffect(()=> {
-      dispatch(getDevice); 
+      // 장비 종류
+      dispatch(getDevice);
+      // 부품 종류
+      // dispatch(getDevicePart);
+      // CS 증상코드
+      dispatch(getCsReason);
+      // 배송방법
+      dispatch(getShipping);
+      // 배송
+      dispatch(getShipment);
+
    }, []);
 
 
