@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { 
    IonPage,
    IonContent,
@@ -18,9 +18,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import './csList.css';
 import '../../style/app.css';
 
-// api ul
-import { CS_LIST } from '../../API/apiUrl';
-
 // action
 import { clearSearch } from '../../store/actions/actions';
 import { csList } from '../../store/user/user';
@@ -29,18 +26,16 @@ import { csList } from '../../store/user/user';
 import Nav from '../nav/Nav';
 import SideMenu from '../../commonComponent/sideMenu/SideMenu';
 import Header from '../../commonComponent/header/Header';
+import Loading from '../../loading/Loding';
 
 const getSaerchData = state => state.itemReducer.searchFilter;
-
-// let today = new Date();   
-// let year = String(today.getFullYear()); // 년도
-// let month = ("0" + (today.getMonth() + 1)).slice(-2) ; // 월
-// let date = ("0 "+ today.getDate()).slice(-2); // 날짜
-// let todayString = `${year}-${month}-${date}`;
+const getCsListData = state => state.itemReducer.items;
 
 function CsList() {
    const dispatch = useDispatch();
    const searchData = useSelector(getSaerchData);
+   const csListData = useSelector(getCsListData);
+   const [ searchLoading, setSearchLoading ] = useState(false);
    const [ dateBtns , setDateBtns ] = useState([
       {
          title: "오늘",
@@ -72,14 +67,32 @@ function CsList() {
       ...searchData,
    });
    
+
    useEffect(()=> {
       setSearch({
          ...searchData,
       });
-      csList(search);
+
+      dispatch(csList());
+
    }, [searchData]);
+   
+   const searchSubmit = async () => {
 
+      try {
+         setSearchLoading(true);
 
+         await dispatch(csList(search));
+
+      } catch(err) {
+
+         console.log(err);
+      }
+      
+      setSearchLoading(false);
+   }
+
+   // list
    const dateSelectBtn = dateBtns.map((arg, index) => {
       let fnDate = arg.fnCode;
 
@@ -97,6 +110,8 @@ function CsList() {
          done: false,
       }
    });
+   
+   // event 
    const prevDate = date => {
       let d = new Date(); 
       let monthOfYear = d.getMonth();
@@ -106,8 +121,9 @@ function CsList() {
       let month = ("0" + (d.getMonth() + 1)).slice(-2);
       let day = ("0" + (d.getDate())).slice(-2);
 
-      return `${year}-${month}-${day}`
+      return String(`${year}-${month}-${day}`)
    };
+
    const onClickData = (value, id) => {
       const filterDate = dateBtns.map((arg,index) => {
          if(index === id) {
@@ -123,6 +139,7 @@ function CsList() {
          }
       });
       setDateBtns(filterDate);
+
       switch(value) {
          case "today": 
             setSearch({
@@ -134,29 +151,29 @@ function CsList() {
          case "month-1":
             setSearch({
                ...searchData,
-               date1: prevDate(1),
-               date2: prevDate(0),
+               date1: prevDate(0),
+               date2: prevDate(1),
             });
             break;
          case "month-3":
             setSearch({
                ...searchData,
-               date1: prevDate(3),
-               date2: prevDate(0),
+               date1: prevDate(0),
+               date2: prevDate(3),
             });
             break;
          case "month-6":
             setSearch({
                ...searchData,
-               date1: prevDate(6),
-               date2: prevDate(0),
+               date1: `${prevDate(6)}`,
+               date2: `${prevDate(0)}`,
             });
             break;
          case "month-9":
             setSearch({
                ...searchData,
-               date1: prevDate(9),
-               date2: prevDate(0),
+               date1: `${prevDate(9)}`,
+               date2: `${prevDate(0)}`,
             });
             break;
          default:
@@ -172,6 +189,61 @@ function CsList() {
       });
    };
 
+
+   let list;
+
+   if(csListData.length) {
+      list = csListData.map((arg, index) => (
+         <div className='form-list-item' key={index}>
+            <IonRouterLink
+               routerLink={`/home/detail/${arg.Code}`}
+            >
+               <div className='item-header'>
+                  <span className='item-date'>
+                     {arg.DateRequest}
+                  </span>
+                  <span className='item-view'>
+                     View
+                  </span>
+               </div>
+               <ul className='item-contents'>
+                  <li>
+                     <strong>
+                        Register No.
+                     </strong>
+                     <div>
+                        <span>
+                           {arg.Code}
+                        </span>
+                     </div>
+                  </li>
+                  <li>
+                     <strong>
+                        Device Model 
+                     </strong>
+                     <div>
+                        <span>
+                           {arg.ProductVal}
+                        </span>
+                     </div>
+                  </li>
+                  <li>
+                     <strong>
+                        Result
+                     </strong>
+                     <div>
+                        <span className='result-box'>
+                           접수대기
+                        </span>
+                     </div>
+                  </li>
+               </ul>
+            </IonRouterLink>      
+         </div>
+      ));
+   } else {
+      list = <p style={{textAlign:'center',marginTop:'100px'}}>접수내역이 없습니다.</p>
+   }
 
    return (
       <>
@@ -202,7 +274,10 @@ function CsList() {
                               <button
                                  className='reset-btn'
                                  type="button"
-                                 onClick={()=> dispatch(clearSearch())}
+                                 onClick={()=> {
+                                    setDateBtns(removeDateBtn);
+                                    dispatch(clearSearch());
+                                 }}
                               >
                                  초기화
                               </button> 
@@ -233,38 +308,12 @@ function CsList() {
                               </div>
                               <ul className='date-tab'>
                                  {dateSelectBtn}
-                                 {/* <li className='items'>
-                                    <button onClick={() => onClickData('today')}>
-                                       오늘
-                                    </button>
-                                 </li>
-                                 <li className='items'>
-                                    <button onClick={() => onClickData('month-1')}>
-                                       1개월전
-                                    </button>
-                                 </li>
-                                 <li className='items'>
-                                    <button onClick={() => onClickData('month-3')}>
-                                       3개월
-                                    </button>
-                                 </li>
-                                 <li className='items'>
-                                    <button onClick={() => onClickData('month-6')}>
-                                       6개월
-                                    </button>
-                                 </li>
-                                 <li className='items'>
-                                    <button onClick={() => onClickData('month-9')}>
-                                       9개월
-                                    </button>
-                                 </li> */}
                               </ul>
                            </div>
                         </div>
                         <IonButton
                            class='ion-search-submit'
-                           type="submit"
-                           onClick={()=> csList(search)}
+                           onClick={searchSubmit}
                         >
                            검색
                         </IonButton>
@@ -274,107 +323,17 @@ function CsList() {
                      <p className='list-count-txt'>
                         총
                         <span>
-                           0
+                          {csListData.length}
                         </span>
                         건의 접수가 있습니다.
                      </p>
                      <article className='form-list'>
-                        <div className='form-list-item'>
-                           <IonRouterLink
-                              routerLink=''
-                           >
-                              <div className='item-header'>
-                                 <span className='item-date'>
-                                    2022-01-20
-                                 </span>
-                                 <span className='item-view'>
-                                    View
-                                 </span>
-                              </div>
-                              <ul className='item-contents'>
-                                 <li>
-                                    <strong>
-                                       Register No.
-                                    </strong>
-                                    <div>
-                                       <span>
-                                          CS202020202020
-                                       </span>
-                                    </div>
-                                 </li>
-                                 <li>
-                                    <strong>
-                                       Device Model 
-                                    </strong>
-                                    <div>
-                                       <span>
-                                          abcdefghijklmnop
-                                       </span>
-                                    </div>
-                                 </li>
-                                 <li>
-                                    <strong>
-                                       Result
-                                    </strong>
-                                    <div>
-                                       <span className='result-box'>
-                                          접수대기
-                                       </span>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </IonRouterLink>      
-                        </div>
-                        <div className='form-list-item'>
-                           <IonRouterLink
-                              routerLink=''
-                           >
-                              <div className='item-header'>
-                                 <span className='item-date'>
-                                    2022-01-20
-                                 </span>
-                                 <span className='item-view'>
-                                    View
-                                 </span>
-                              </div>
-                              <ul className='item-contents'>
-                                 <li>
-                                    <strong>
-                                       Register No.
-                                    </strong>
-                                    <div>
-                                       <span>
-                                          CS202020202020
-                                       </span>
-                                    </div>
-                                 </li>
-                                 <li>
-                                    <strong>
-                                       Device Model 
-                                    </strong>
-                                    <div>
-                                       <span>
-                                          abcdefghijklmnop
-                                       </span>
-                                    </div>
-                                 </li>
-                                 <li>
-                                    <strong>
-                                       Result
-                                    </strong>
-                                    <div>
-                                       <span className='result-box'>
-                                          접수대기
-                                       </span>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </IonRouterLink>      
-                        </div>
+                       {list}
                      </article>
                   </article>
                </section>
                <Nav/>
+               <Loading hide={searchLoading}/>
             </IonContent>
          </IonPage>
       </>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
    IonPage,
    IonContent,
@@ -22,14 +22,19 @@ import RegisterDevice from '../component/RegisterDevice';
 import RegisterParts from '../component/RegisterParts';
 import Loading from '../../loading/Loding';
 
-function NewRegisterStep3({title}) {
+function NewRegisterStep3({title, match}) {
    const history = useHistory();
    const dispatch = useDispatch();
    const [ disabled, setDisabled ] = useState(true);
    const [ loading, setLoading ] = useState(false);
    const [ showAlert3, setShowAlert3 ] = useState(false);
    const [ showAlert4, setShowAlert4 ] = useState(false);
+   const [ itemTarget, setItemTarget ] = useState("");
    const csData = useSelector(state => state.CSListReducer);
+
+   useEffect(()=> {
+
+   }, [itemTarget])
 
    const formSubmit = async () => {
 
@@ -39,9 +44,9 @@ function NewRegisterStep3({title}) {
          await addCsList(csData)
             .then(res=> {
 
-               console.log(res, 'res!');
+               setItemTarget(res.IdentityCode);
 
-               if(res.Result) {
+               if(res.IdentityCode) {
                   setShowAlert3(true);
                } else {
                   setShowAlert4(true);
@@ -62,7 +67,7 @@ function NewRegisterStep3({title}) {
    return (
       <>
       <IonPage>
-         <AppHeader title={title}/>
+         <AppHeader title={title} match={match.params.pathName}/>
          <IonContent class='app-content tabBtn-wraper'>
             <h1 className='list-title' style={{color: '#1776e1'}}>
                <span>STEP3.</span> CS 요청 내용 확인 
@@ -102,7 +107,7 @@ function NewRegisterStep3({title}) {
                     text: '내역 확인하기',
                     role: 'cancel',
                     handler: () => {
-                      console.log('Confirm Cancel: blah');
+                      history.push(`/home/detail/${itemTarget}`); 
                     }
                   },
                   {

@@ -71,7 +71,7 @@ function RegisterParts({disabled}) {
          return [...state]
       });
 
-   }
+   };
 
    const formCheck = () => {
       let check = true;
@@ -85,9 +85,33 @@ function RegisterParts({disabled}) {
       
       if(check) {
          dispatch(csRemoveToggle());
-         history.push('/home/menu2/step3');
+         history.push('/home/menu2/step3/add');
       }
-   }
+   };
+
+
+   const [ img, setImg ] = useState(null);
+   const [ previewImg, setPreviewImg ] = useState(null);
+   
+   const onFileUpload = e => {
+      let reader = new FileReader()
+
+      if(e.target.files[0]) {
+         reader.readAsDataURL(e.target.files[0])
+         
+         setImg([...img, e.target.files[0]])
+      }
+
+      reader.onloadend = () => {
+         const previewImgUrl = reader.result
+
+         if(previewImgUrl) {
+            setPreviewImg([...previewImg, previewImgUrl])
+         }
+        
+      }
+      
+   };
 
    return(
       <>
@@ -231,6 +255,27 @@ function RegisterParts({disabled}) {
                               placeholder='요청사항을 입력하세요'
                            />
                         </div>
+                        <div className="custom-forms">
+                           <strong className='forms-title'>
+                              첨부파일<span>*</span>
+                           </strong>
+                           <div className='files-wrap'>
+                              <label className='upload-btn' htmlFor={`file${index}`}>
+                                 <span>1</span>/5
+                              </label>
+                              <input 
+                                 type="file" 
+                                 id={`file${index}`}
+                                 className="hidden" 
+                                 accept='.jpg, .jpeg, .gif, .png' 
+                                 multiple={true}
+                                 onChange={onFileUpload}
+                              />
+                              <ul className='file-list'>
+                                 
+                              </ul>
+                           </div>
+                        </div>
                      </div>
                   </article>
                ))
@@ -266,7 +311,7 @@ function RegisterParts({disabled}) {
                class='app-tab-btn ion-color-tab-back' 
                color='ion-color-tab-back'
                routerDirection='back' 
-               routerLink='/home/menu2'
+               routerLink='/home/menu2/add'
             >
                이전
             </IonButton>

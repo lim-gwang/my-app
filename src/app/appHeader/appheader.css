@@ -3,3 +3,11 @@
    font-size:16px !important;
    background:url(../../images/app/btn_back.png) left 0 center / auto no-repeat;
 }
+
+.repairBtn {
+   font-size:16px;
+   color:#1776e1;
+   padding-left:24px;
+   padding-right:10px;
+   background:url(../../images/common/repaireBtn.png) left 0 top 15px / auto no-repeat;
+}

@@ -6,14 +6,11 @@ import {
 } from '@ionic/react';  
 import { Redirect, Route } from 'react-router-dom'; 
 
-// router url
-import { appMenuTree } from '../../router/router';
-
 // component
 import AppHeader from '../appHeader/AppHeader';
 import RegisterDevice from '../component/RegisterDevice';
 
-function NewRegister({title}) {
+function NewRegister({title, match}) {
    const [ DeviceForm, setDeviceForms ] = useState({
       AllowNew: true,
       Code:"",
@@ -34,7 +31,7 @@ function NewRegister({title}) {
 
    return(
       <IonPage>
-         <AppHeader title={title}/>
+         <AppHeader title={title} match={match.params.pathName}/>
          <IonContent class='app-content tabBtn-wraper'>
             <h2 className='list-title' style={{color: '#1776e1'}}>
                <span>STEP1.</span> CS 요청 정보 입력

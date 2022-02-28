@@ -3,7 +3,7 @@ export const ADD_LIST = 'ADD_LIST';
 export const USER_DATA = 'USER_DATA';
 export const PROCESS_LIST = 'PROCESS_LIST';
 export const DEL_LIST = 'DEL_LIST';
-
+export const FILTER_LIST = 'FILTER_LIST';
 // 검색
 export const SEARCH = 'SEARCH';
 export const CLEAR_SEARCH = 'CLEAR_SEARCH';

@@ -1,0 +1,11 @@
+.disabled-form .custom-forms {
+   margin-bottom:12px;
+}
+
+.disabled-form .custom-forms input {
+   padding:5px 15px;
+}
+.disabled-form .custom-forms textarea {
+   min-height:auto;
+   height: 100px;
+}

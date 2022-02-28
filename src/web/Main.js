@@ -20,6 +20,7 @@ import Header from '../commonComponent/header/Header';
 import SideMenu from '../commonComponent/sideMenu/SideMenu';
 import Select from 'react-select';
 import ExceptionPath from '../exceptionPath/ExceptionPath';
+import Asd from './client/Asd';
 
 
 const options = [
@@ -76,12 +77,13 @@ function Main() {
          <Header windowSize={windowSize.width} thisDeskTop={thisDeskTop}/> 
             <IonContent>
                   <IonRouterOutlet>
-                     <Route path={subRouterPath.page1} exact={true} render={ () => (
+                     <Route path='/home/menu1/:pathName' exact={true} render={ () => (
                         <IonPage>
                            <IonContent>
-                              <h1>page1</h1>
-                           </IonContent>
-                        </IonPage>
+                           <h1>page2</h1>
+                           <Asd open={true}/>
+                        </IonContent>
+                     </IonPage>
                      )}/>
                      <Route path={subRouterPath.page2} exact={true} render={ () => (
                         <IonPage>

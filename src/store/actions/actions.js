@@ -15,6 +15,7 @@ import {
    CS_CLEAR,
    CS_PART_REMOVE_TOGGLE,
    CLEAR_SEARCH,
+   FILTER_LIST,
 } from './action_type';
 
 /******************************
@@ -35,6 +36,7 @@ export const search = data => ({
    type: SEARCH,
    payload: data,
 });
+// 검색조건 초기화
 export const clearSearch = () => ({
    type: CLEAR_SEARCH,
    payload: {
@@ -53,10 +55,10 @@ export const processList = id => ({
    type: PROCESS_LIST,
    payload: id,
 });
-// export const filterList = id => ({
-//    type: FILTER_LIST,
-//    payload: id,
-// })
+export const filterList = list => ({
+   type: FILTER_LIST,
+   payload: list,
+})
 
 /******************************
     CS 요청 등록 및 수정 action
@@ -112,7 +114,8 @@ export const csClear = () => ({
             ShipmentID:null,
             ShippingID:null,
             ShipCode:"",
-            RMemo:""
+            RMemo:"",
+            // Files:[],
          } 
       ]
    }
@@ -182,6 +185,10 @@ export const itemReducer = ( state = initialState, action ) => {
             ...state,
             searchFilter: action.payload,
          }
+      case FILTER_LIST:
+         return {
+            items: action.payload,
+         }
       case CLEAR_SEARCH: 
          return {
             ...state,
@@ -215,7 +222,8 @@ const CSListState = {
             ShipmentID:null,
             ShippingID:null,
             ShipCode:"",
-            RMemo:""
+            RMemo:"",
+            Files: [],
          } 
       ]
 };

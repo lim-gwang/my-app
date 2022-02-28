@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
    IonButton,
    IonContent,
@@ -28,6 +28,13 @@ function Login() {
       id: '',
       pw: ''
    });
+
+   useEffect(()=> {
+      // token값이 있다면 main 페이지로 이동
+      if(token) {
+         window.location.href = '/home';
+      }
+   }, [token])
 
    const handleChange = key => e =>{
       setLoginData({
@@ -67,11 +74,6 @@ function Login() {
       if (e.key !== 'Enter') return;
 
       SubmitLogin();
-   }
-
-   // token값이 있다면 main 페이지로 이동
-   if(token) {
-      window.location.href = '/home';
    }
 
    return (

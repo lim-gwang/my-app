@@ -24,7 +24,7 @@ function Nav() {
             <IonButton
                class='ion-color-nav'
                color='ion-color-nav'
-               routerLink={subRouterPath.page2}
+               routerLink='/home/menu2/add'
                onClick={() => setOpen(false)}
             >
                CS요청

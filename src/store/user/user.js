@@ -2,7 +2,8 @@ import axios from 'axios';
 import { 
    userData, 
    addList, 
-   delList 
+   delList,
+   filterList
 } from '../actions/actions';
 
 import { 
@@ -12,11 +13,29 @@ import {
    ADD_CS_LIST,
  } from '../../API/apiUrl';
 
-let headersToken = () => ({
+const headersToken = () => ({
    headers: {
-      jwttoken: sessionStorage.getItem('token')
+      'Content-Type': 'multipart/form-data',
+      jwttoken: sessionStorage.getItem('token'),
    }
 });
+const tokenRenewal = newToken => {
+   sessionStorage.setItem('token', newToken);
+}  
+
+const form_data = data => {
+   let formData = new FormData();
+
+   for ( let key in data) {
+      formData.append(key, data[key]);
+   }
+
+   // for (var pair of formData.entries()) {
+   //    console.log(pair[0]+ ': ' + pair[1]);
+   // }
+
+   return formData;
+}
 
 // 로그인
 export const login = ({id, pw}) => {
@@ -26,8 +45,9 @@ export const login = ({id, pw}) => {
 
    return axios.post(LOGIN, formData)
       .then(res => {
+         console.log(res, 'login');
          const message = res.data.Message;
-         const token = res.data.IdentityCode;
+         const token = res.data.Token;
          sessionStorage.setItem('token', token);
 
          return  {
@@ -44,7 +64,7 @@ export const logout = () => {
 // 유저 정보
 const _userData = async () => {
    const items = await axios.get(USER_DATA, headersToken())
-   .then(res=> res.data.List);
+      .then(res=> res.data.List);
 
    return items;
 };
@@ -52,49 +72,58 @@ const _userData = async () => {
 export const fetchUserData = (dispatch, getState) => {
    _userData()
       .then(items=> {
-         dispatch(userData(items))
+         dispatch(userData(items));
       });
 };
 
 // cs 요청 목록
 const _csList = async data  => {
-
-   let formData = new FormData();
-
-   for ( let key in data) {
-      formData.append(key, data[key]);
-   }
-
-   const list = await axios.post(CS_LIST, headersToken());
+   const list = await axios.post(CS_LIST, form_data(data), headersToken());
 
    return list;
 };
 
-export const csList = data => (dispatch, getState) => {
+export const csList = data => ( dispatch, getState ) => {
    _csList(data)
       .then(res=> {
-         console.log(res, 'cslist');
-         return res;
+         let token = res.data.Token;
+         tokenRenewal(token);
+         
+         dispatch(addList(res.data.List));
+      });
+};
+
+// cs 검색 필터 목록
+const _csFilterList = async data  => {
+   const list = await axios.post(CS_LIST, form_data(data), headersToken());
+
+   return list;
+};
+
+export const csFilterList = data => ( dispatch, getState ) => {
+   _csFilterList(data)
+      .then(res=> {
+         // dispatch(filterList(res.data.List));
+         dispatch(addList(res.data.List));
       });
 };
 
 // cs 접수
-const _addCsList = async (data) => {
+const _addCsList = async data => {
 
-   let formData = new FormData();
-
-   for ( let key in data) {
-      formData.append(key, data[key]);
-   }
-
-   const list = await axios.post(ADD_CS_LIST, formData, headersToken());
+   const list = await axios.post(ADD_CS_LIST, form_data(data), headersToken());
 
    return list;
 };
 
 export const addCsList = data => {
    return _addCsList(data)
-      .then(res=> res.data);
+      .then(res=> {
+         let token = res.data.Token;
+         tokenRenewal(token);
+         
+         return res.data;
+      });
 };
 
 // export const fetchCsList = (dispatch, getState) => {

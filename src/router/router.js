@@ -6,7 +6,7 @@ export const routePath = {
 // sub page url 설정
 export const subRouterPath = {
    page1:`${routePath.home}/menu1`,
-   page2:`${routePath.home}/menu2`,
+   page2:`${routePath.home}/menu2/add`,
 }
 
 //  app menu tree 

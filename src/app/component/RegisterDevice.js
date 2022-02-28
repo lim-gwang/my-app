@@ -14,6 +14,7 @@ import { addCsDevice } from '../../store/actions/actions';
 
 const deviceSelector = state => state.deviceReducer;
 const CsListSelector = state => state.CSListReducer;
+
 function RegisterDevice({disabled}) {
    const dispatch = useDispatch();
    const history = useHistory();
@@ -42,7 +43,7 @@ function RegisterDevice({disabled}) {
          return;
        } 
        dispatch(addCsDevice(deviceForm));
-       history.push('/home/menu2/step2');
+       history.push('/home/menu2/step2/add');
    }
 
    // 장비 목록

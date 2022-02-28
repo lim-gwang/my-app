@@ -10,7 +10,7 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route  } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { useHistory } from 'react-router';
 //component
 import Login from './login/Login';
 import Main from './web/Main';
@@ -48,19 +48,13 @@ const platforms = getPlatforms();
 const thisDeskTop = platforms.map(arg => arg === 'desktop')[0];
 
 const App = () => {
+   const dispatch = useDispatch();
    const token = sessionStorage.getItem('token');
    const itemSelector = (state) => state.itemReducer.items;
-   const dispatch = useDispatch();
-
-   // useEffect(() => {
-   //    dispatch(fetchUserData)
-   //  }, []);
 
    const userItem = useSelector(itemSelector);
 
-
    let mainPage = null;
-
 
    if(thisDeskTop) {
       // web

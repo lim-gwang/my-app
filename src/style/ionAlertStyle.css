@@ -55,7 +55,7 @@
 
 .custom-alert-modal.err .alert-button {
    background: #fff;
-   border-color: #fe3535;
+   border-color: #fe3535 !important;
    color: #fe3535;
    width: 100%;
    height: 45px;

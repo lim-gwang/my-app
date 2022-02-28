@@ -14,7 +14,6 @@ import { routePath, subRouterPath, appMenuTree } from '../router/router';
 import '../style/app.css';
 
 // action
-import { csList, userData } from '../store/user/user';
 import { 
    getDevice,
    // getDevicePart,
@@ -29,19 +28,18 @@ import NewRegisterStep1 from './newRegister/NewRegisterStep1';
 import NewRegisterStep2 from './newRegister/NewRegisterStep2';
 import NewRegisterStep3 from './newRegister/NewRegisterStep3';
 import ExceptionPath from '../exceptionPath/ExceptionPath';
+import DetailItem from './detailItem/DetailItem';
+import RepairItem from './repair/RepairItem';
 
 const menuTitle = appMenuTree.depth1[0].depth2.map(menu => menu.title);
 
 function AppMain() {
-   const token = sessionStorage.getItem('token');
-
+   let token = sessionStorage.getItem('token');
    const dispatch = useDispatch();
-   // token 값이 없으면 로그인 페이지로 이동 
-   if(!token) {
-      window.location.href = '/login';
-   }
 
    useEffect(()=> {
+      token = sessionStorage.getItem('token');
+
       // 장비 종류
       dispatch(getDevice);
       // 부품 종류
@@ -55,6 +53,11 @@ function AppMain() {
 
    }, []);
 
+   // token 값이 없으면 로그인 페이지로 이동 
+   if(!token) {
+      window.location.href = '/login';
+      return;
+   }
 
    return (
       <IonPage className="ion-page">
@@ -63,14 +66,25 @@ function AppMain() {
                <Route path={subRouterPath.page1} exact={true}>
                   <CsList title={menuTitle[0]}/>
                </Route>
-               <Route path={subRouterPath.page2} exact={true}>
-                  <NewRegisterStep1 title={menuTitle[1]}/>
+               <Route path='/home/menu2/:pathName' exact={true} render={props=> (
+                  <NewRegisterStep1 title={menuTitle[1]} match={props.match}/>
+               )}>
                </Route>
-               <Route path='/home/menu2/step2' exact={true}>
-                  <NewRegisterStep2 title={menuTitle[1]} />
+               <Route path='/home/menu2/step2/:pathName' exact={true} render={props=> (
+                  <NewRegisterStep2 title={menuTitle[1]} match={props.match}/>
+               )}>
                </Route>
-               <Route path='/home/menu2/step3' exact={true}>
-                  <NewRegisterStep3 title={menuTitle[1]}/>
+               <Route path='/home/menu2/step3/:pathName' exact={true} render={props=> (
+                  <NewRegisterStep3 title={menuTitle[1]} match={props.match}/>
+               )}>
+               </Route>
+               <Route path='/home/detail/:pathName' exact={true} render={props=> (
+                  <DetailItem title='CS 상세내역' match={props.match}/>
+               )}>
+               </Route>
+               <Route path='/home/repair/:pathName' exact={true} render={props=> (
+                  <RepairItem title='CS내역 수정' match={props.match}/>
+               )}>
                </Route>
                <Route path={routePath.home} render={() => <Redirect to={subRouterPath.page1}/>} exact={true}/>
                <Route component={ExceptionPath} />

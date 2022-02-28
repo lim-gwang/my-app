@@ -43,13 +43,15 @@
 .app-btn-wrap.half .app-tab-btn {
    width:50%;
 }
-.custom-forms > label {
+.custom-forms > label,
+.custom-forms > .forms-title {
    display:block;
    margin-bottom:10px;
    font-size:14px;
    color:#333;
 }
-.custom-forms > label > span {
+.custom-forms > label > span,
+.custom-forms > .forms-title > span {
    color:#fe3535;
 }
 .custom-forms { 
@@ -59,6 +61,11 @@
    margin-bottom:0;
 }
 .device-form .custom-forms > textarea {min-height:250px;}
+.custom-forms > .files-wrap {
+   padding:10px 15px;
+   border: 1px solid #b5b5c3;
+   border-radius:3px;
+}
 .form-section ~ .form-section {
    margin-top:20px;
 }
@@ -164,4 +171,21 @@
 .part-area-add > .ion-color-part-area-add ion-icon {
    position:absolute;
    left:10px;
+}
+
+.upload-btn {
+   font-size:12px;
+   width:16.6667%;
+   display:inline-block;
+   max-width:50px;
+   height:50px;
+   border:1px solid #1776e1;
+   border-radius:3px;
+   text-align:center;
+   color:#5e6278;
+   padding-top:25px;
+   background: url(../../images/common/btn_camrea.png) top 7px center / auto no-repeat;
+}
+.upload-btn > span {
+   color:#fe3535;  
 }
