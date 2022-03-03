@@ -29,7 +29,9 @@ import NewRegisterStep2 from './newRegister/NewRegisterStep2';
 import NewRegisterStep3 from './newRegister/NewRegisterStep3';
 import ExceptionPath from '../exceptionPath/ExceptionPath';
 import DetailItem from './detailItem/DetailItem';
-import RepairItem from './repair/RepairItem';
+import RepairRegisterStep1 from './repair/RepairRegisterStep1';
+import RepairRegisterStep2 from './repair/RepairRegisterStep2';
+import RepairRegisterStep3 from './repair/RepairRegisterStep3';
 
 const menuTitle = appMenuTree.depth1[0].depth2.map(menu => menu.title);
 
@@ -66,15 +68,15 @@ function AppMain() {
                <Route path={subRouterPath.page1} exact={true}>
                   <CsList title={menuTitle[0]}/>
                </Route>
-               <Route path='/home/menu2/:pathName' exact={true} render={props=> (
+               <Route path='/home/menu2/add' exact={true} render={props=> (
                   <NewRegisterStep1 title={menuTitle[1]} match={props.match}/>
                )}>
                </Route>
-               <Route path='/home/menu2/step2/:pathName' exact={true} render={props=> (
+               <Route path='/home/menu2/add/step2' exact={true} render={props=> (
                   <NewRegisterStep2 title={menuTitle[1]} match={props.match}/>
                )}>
                </Route>
-               <Route path='/home/menu2/step3/:pathName' exact={true} render={props=> (
+               <Route path='/home/menu2/add/step3' exact={true} render={props=> (
                   <NewRegisterStep3 title={menuTitle[1]} match={props.match}/>
                )}>
                </Route>
@@ -83,7 +85,15 @@ function AppMain() {
                )}>
                </Route>
                <Route path='/home/repair/:pathName' exact={true} render={props=> (
-                  <RepairItem title='CS내역 수정' match={props.match}/>
+                  <RepairRegisterStep1 title='CS내역 수정' match={props.match} />
+               )}>
+               </Route>
+               <Route path='/home/repair/step2/:pathName' exact={true} render={props=> (
+                  <RepairRegisterStep2 title='CS내역 수정' match={props.match} />
+               )}>
+               </Route>
+               <Route path='/home/repair/step3/:pathName' exact={true} render={props=> (
+                  <RepairRegisterStep3 title='CS내역 수정' match={props.match} />
                )}>
                </Route>
                <Route path={routePath.home} render={() => <Redirect to={subRouterPath.page1}/>} exact={true}/>

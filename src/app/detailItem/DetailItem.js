@@ -9,25 +9,27 @@ import {
    chevronUpOutline, 
 } from 'ionicons/icons';
 
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // css
 import './detailItem.css';
 
 // action
-
+import { addCsDevice, csUpDate } from '../../store/actions/actions';
 //component 
 import AppHeader from '../appHeader/AppHeader';
 
 
 function DetailItem({title, match}) {
    const Match = match.params.pathName;
+   const dispatch = useDispatch();
    const getTargetList = state => state.itemReducer.items;
-   const targetList = useSelector(getTargetList, shallowEqual);
+   const targetList = useSelector(getTargetList);
    const filterList = targetList.filter(arg => arg.Code === Match);
    const [ disabled, setDisabled ] = useState(true);
    const [ content, setContent ] = useState({});
 
    let addToggle;
+
 
    if(filterList[0]) {
       addToggle = filterList[0].Details.map(arg => {
@@ -36,7 +38,7 @@ function DetailItem({title, match}) {
             toggle: false,
          }
       });
-   } ;
+   };
    
    useEffect(()=> {
       setContent({
@@ -44,6 +46,7 @@ function DetailItem({title, match}) {
          Details: addToggle,
       });
 
+      dispatch(addCsDevice(filterList[0]));
    },[]);
 
    const onClickToggle = index => {
@@ -177,12 +180,10 @@ function DetailItem({title, match}) {
    } else {
       partList = <></>
    }
-
-   console.log(content)
    return (
       <>
          <IonPage>
-            <AppHeader title={title} match={Match}/>
+            <AppHeader title={title} match={Match} detail={true}/>
             <IonContent class='app-content tabBtn-wraper'>
             <h2 className='list-title'>
                Register No : {Match}
@@ -197,7 +198,7 @@ function DetailItem({title, match}) {
                      <input 
                         type='text' 
                         id='device'
-                        defaultValue={content.SerialNo}
+                        defaultValue={content.ProductVal}
                         disabled={disabled}
                      />
                   </div>
@@ -249,7 +250,7 @@ function DetailItem({title, match}) {
                      Items
                   </span>
                </article>
-               {partList}
+                  {partList}
             </section>
             </IonContent>
          </IonPage>

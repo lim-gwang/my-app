@@ -11,12 +11,12 @@ import {
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 //css 
-import './appheader.css';
+import '../appHeader/appheader.css';
 // action
 import { csClear } from '../../store/actions/actions';
 import { csDel } from '../../store/user/user';
 
-function AppHeader({title, match, goBack, detail}) {
+function RepairHeader({title, match}) {
    const history = useHistory();
    const dispatch = useDispatch();
    const [ backAlert, setBackAlert ] = useState(false);
@@ -24,36 +24,29 @@ function AppHeader({title, match, goBack, detail}) {
       Code: match,
    });
 
-   let backBtn;
-
-   // cs 수정 페이지
-   if(match === 'add') {
-      backBtn = <IonButton class='backBtn' onClick={()=> setBackAlert(true)}>CS 관리</IonButton>
-   // cs 상세보기
-   } else {
-      backBtn = <IonButton class='backBtn' onClick={()=> dispatch(csClear())} routerLink='/home'>CS 관리</IonButton>
-   }
-
    return(
       <>
       <IonHeader mode='ios' className="ion-no-border">
          <IonToolbar>
             <IonButtons slot="start">
-               {backBtn}
+               <IonButton 
+                  class='backBtn' 
+                  onClick={()=> history.goBack()}
+               >
+                  CS 상세내역
+               </IonButton>
             </IonButtons>
             <IonTitle class='newRegister-title'>
                {title}
             </IonTitle>
-            { detail && (
                <IonButtons slot="end">
                   <IonButton 
-                     class='repairBtn'
-                     routerLink={`/home/repair/${match}`}
+                     class='deleteBtn'
+                     onClick={()=> dispatch(csDel(itemCode))}
                   >
-                     수정
+                     취소
                   </IonButton>
                </IonButtons>
-            )}
          </IonToolbar>
       </IonHeader>
       <IonAlert
@@ -64,7 +57,7 @@ function AppHeader({title, match, goBack, detail}) {
          cssClass='custom-alert-modal back'
          header={`${title}을 취소하시겠습니까?`}
          subHeader={''}
-         message={'요청내역이 목록에서 삭제됩니다.'}
+         message={'요청수정 내용이 저장되지 않습니다.'}
          buttons={[
             {
                text: '네',
@@ -87,4 +80,4 @@ function AppHeader({title, match, goBack, detail}) {
    )
 }
 
-export default AppHeader;
+export default RepairHeader;

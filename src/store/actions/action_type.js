@@ -10,6 +10,8 @@ export const CLEAR_SEARCH = 'CLEAR_SEARCH';
 // CS 요청 저장
    // 장비 추가
 export const ADD_CS_DEVICE = 'ADD_CS_DEVICE';
+   // 기존 장비 부품
+export const CS_UPDATE = 'CS_UPDATE';
    // 부품 추가
 export const ADD_CS_PART = 'ADD_CS_PART';
    // 부품 제거

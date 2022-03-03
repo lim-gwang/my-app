@@ -38,7 +38,7 @@ function NewRegisterStep1({title, match}) {
                <h1 className='list-title' style={{color: '#1776e1'}}>
                   <span>STEP2.</span> 부품추가 
                </h1>
-               <RegisterParts/>
+               <RegisterParts match={match.params.pathName}/>
             </IonContent>
       </IonPage>
    )

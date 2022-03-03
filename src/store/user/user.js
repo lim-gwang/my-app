@@ -11,6 +11,7 @@ import {
    USER_DATA,
    CS_LIST,
    ADD_CS_LIST,
+   DEL_CS_LIST,
  } from '../../API/apiUrl';
 
 const headersToken = () => ({
@@ -88,10 +89,25 @@ export const csList = data => ( dispatch, getState ) => {
       .then(res=> {
          let token = res.data.Token;
          tokenRenewal(token);
-         
+
          dispatch(addList(res.data.List));
       });
 };
+// cs 삭제
+const _csDel = async code => {
+   console.log(code);
+   const list = await axios.post(DEL_CS_LIST, form_data(code), headersToken());
+
+   return list;
+}
+
+export const csDel = code => (dispatch, getState) => {
+   _csDel(code)
+      .then(res => {
+         console.log(res.data, 'del!');
+         dispatch(delList(code));
+      });
+}
 
 // cs 검색 필터 목록
 const _csFilterList = async data  => {
@@ -110,7 +126,6 @@ export const csFilterList = data => ( dispatch, getState ) => {
 
 // cs 접수
 const _addCsList = async data => {
-
    const list = await axios.post(ADD_CS_LIST, form_data(data), headersToken());
 
    return list;

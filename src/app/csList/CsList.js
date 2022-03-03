@@ -28,11 +28,12 @@ import SideMenu from '../../commonComponent/sideMenu/SideMenu';
 import Header from '../../commonComponent/header/Header';
 import Loading from '../../loading/Loding';
 
-const getSaerchData = state => state.itemReducer.searchFilter;
-const getCsListData = state => state.itemReducer.items;
+
 
 function CsList() {
    const dispatch = useDispatch();
+   const getSaerchData = state => state.itemReducer.searchFilter;
+   const getCsListData = state => state.itemReducer.items;
    const searchData = useSelector(getSaerchData);
    const csListData = useSelector(getCsListData);
    const [ searchLoading, setSearchLoading ] = useState(false);
@@ -72,10 +73,9 @@ function CsList() {
       setSearch({
          ...searchData,
       });
+      searchSubmit();
 
-      dispatch(csList());
-
-   }, [searchData]);
+   }, []);
    
    const searchSubmit = async () => {
 
@@ -151,15 +151,15 @@ function CsList() {
          case "month-1":
             setSearch({
                ...searchData,
-               date1: prevDate(0),
-               date2: prevDate(1),
+               date1: prevDate(1),
+               date2: prevDate(0),
             });
             break;
          case "month-3":
             setSearch({
                ...searchData,
-               date1: prevDate(0),
-               date2: prevDate(3),
+               date1: prevDate(3),
+               date2: prevDate(0),
             });
             break;
          case "month-6":
@@ -200,7 +200,7 @@ function CsList() {
             >
                <div className='item-header'>
                   <span className='item-date'>
-                     {arg.DateRequest}
+                     {arg.DateRequest.split('T')[0]}
                   </span>
                   <span className='item-view'>
                      View
@@ -232,8 +232,8 @@ function CsList() {
                         Result
                      </strong>
                      <div>
-                        <span className='result-box'>
-                           접수대기
+                        <span className={`result-box ${arg.StatusID}`}>
+                           {arg.StatusVal}
                         </span>
                      </div>
                   </li>
@@ -274,9 +274,10 @@ function CsList() {
                               <button
                                  className='reset-btn'
                                  type="button"
-                                 onClick={()=> {
+                                 onClick={(e)=> {
                                     setDateBtns(removeDateBtn);
                                     dispatch(clearSearch());
+                                    e.stopPropagation();
                                  }}
                               >
                                  초기화
@@ -323,7 +324,7 @@ function CsList() {
                      <p className='list-count-txt'>
                         총
                         <span>
-                          {csListData.length}
+                          {csListData.length && csListData.length }
                         </span>
                         건의 접수가 있습니다.
                      </p>

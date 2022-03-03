@@ -12,18 +12,20 @@ import './Register.css';
 import { addCsDevice } from '../../store/actions/actions';
 
 
-const deviceSelector = state => state.deviceReducer;
-const CsListSelector = state => state.CSListReducer;
 
-function RegisterDevice({disabled}) {
+
+function RegisterDevice({disabled, match}) {
    const dispatch = useDispatch();
    const history = useHistory();
+   const deviceSelector = state => state.deviceReducer;
+   const CsListSelector = state => state.CSListReducer;
    const deviceList = useSelector(deviceSelector);
    const csList = useSelector(CsListSelector);
    const [showAlert1, setShowAlert1] = useState(false);
    const [ deviceForm, setDeviceForms ] = useState({
       ...csList
    });
+
    useEffect(()=> {
       setDeviceForms({
          ...csList
@@ -35,15 +37,19 @@ function RegisterDevice({disabled}) {
          CustomerName,
          ProductID,
          SerialNo,
-         Rmemo
+         RMemo
        } = deviceForm;
 
-       if(!(CustomerName && ProductID && SerialNo && Rmemo) ) {
+       if(!(CustomerName && ProductID && SerialNo && RMemo) ) {
          setShowAlert1(true);
          return;
        } 
        dispatch(addCsDevice(deviceForm));
-       history.push('/home/menu2/step2/add');
+       if(match === 'add') {
+         history.push('/home/menu2/step2/add');
+       } else {
+         history.push(`/home/menu2/add/step2`);
+       }
    }
 
    // 장비 목록
@@ -117,9 +123,9 @@ function RegisterDevice({disabled}) {
                </label>
                <textarea 
                   id='Requirement' 
-                  value={deviceForm.Rmemo}
+                  value={deviceForm.RMemo}
                   disabled={disabled} 
-                  onChange={onChange('Rmemo')}
+                  onChange={onChange('RMemo')}
                   placeholder='접수내용'
                />
             </div>

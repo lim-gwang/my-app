@@ -16,6 +16,8 @@ import {
    CS_PART_REMOVE_TOGGLE,
    CLEAR_SEARCH,
    FILTER_LIST,
+   DEL_LIST,
+   CS_UPDATE
 } from './action_type';
 
 /******************************
@@ -30,6 +32,11 @@ export const userData = data => ({
 export const addList = list => ({
    type: ADD_LIST,
    payload: list,
+});
+// cs 리스트 삭제
+export const delList = number => ({
+   type: DEL_LIST,
+   payload: number,
 });
 // CS 검색
 export const search = data => ({
@@ -82,6 +89,10 @@ export const addCsPart = () => ({
       RMemo:""
    },
 });
+export const csUpDate = list => ({
+   type: CS_UPDATE,
+   payload: list,
+})
 export const delCsPart = index => ({
    type: DEL_CS_PART,
    payload: index,
@@ -180,6 +191,12 @@ export const itemReducer = ( state = initialState, action ) => {
             ...state,
             items: action.payload,
          }
+      case DEL_LIST:
+         const filterList = state.items.filter(arg=> arg.Code !== action.payload);
+         return {
+            ...state,
+            items: filterList
+         }
       case SEARCH:
          return {
             ...state,
@@ -210,7 +227,7 @@ const CSListState = {
       CustomerName:"",
       ProductID:"",
       SerialNo:"",
-      Rmemo:"",
+      RMemo:"",
       Details: [
          {
             toggle: true,
@@ -233,6 +250,17 @@ export const CSListReducer = (state = CSListState, action) => {
          return {
             ...state,
             ...action.payload,
+         }
+      case CS_UPDATE:
+         const addToggle = state.Details.map(arg => {
+            return {
+               ...arg,
+               toggle: false,
+            }
+         });
+         return {
+            ...state,
+            Details: addToggle,
          }
       case ADD_CS_PART:
          const removeToggle = state.Details.map(arg => {

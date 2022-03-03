@@ -5,6 +5,8 @@ export const CS_LIST = url+'/api/CS/Gets';
 
 // CS 요청 저장 및 수정 
 export const ADD_CS_LIST = url+'/api/CS/Put';
+// CS 요청 취소
+export const DEL_CS_LIST = url+'/api/CS/Cancel';
 
 // 장비 종류
 export const DEVICE = url+'/api/Code/Device';

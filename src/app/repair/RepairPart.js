@@ -14,9 +14,6 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useHistory } from 'react-router';
 
-//css 
-import './Register.css';
-
 // action
 import { 
    addCsPart, 
@@ -26,9 +23,7 @@ import {
 } from '../../store/actions/actions';
 
 
-
-
-function RegisterParts({disabled, match}) {
+function RepairPart({disabled, match}) {
    const dispatch = useDispatch();
    const history = useHistory();
    const partSelector = state => state.deviceReducer;
@@ -40,6 +35,13 @@ function RegisterParts({disabled, match}) {
    const [ parts, setParts ] = useState([
       ...csList.Details,
    ]);
+   useEffect(()=>{
+      setParts([
+         ...csList.Details
+      ])
+     
+   }, [csList]);
+
    // CS 증상코드
    const getCsReasonList = partList.csReason.map((arg, index) => (
       <option value={arg.Code} key={index}>
@@ -58,13 +60,6 @@ function RegisterParts({disabled, match}) {
          {arg.CodeName}
       </option>
    ));
-
-   useEffect(()=>{
-      setParts([
-         ...csList.Details
-      ])
-     
-   }, [csList]);
 
    const onHandleChange = (index, name) => e => {   
       setParts(state => {
@@ -86,7 +81,7 @@ function RegisterParts({disabled, match}) {
       
       if(check) {
          dispatch(csRemoveToggle());
-         history.push('/home/menu2/add/step3');
+         history.push(`/home/repair/step3/${match}`);
       }
    };
 
@@ -133,7 +128,7 @@ function RegisterParts({disabled, match}) {
                         </strong>
                         <div>
                            {
-                              location !== '/home/menu2/add/step3' ? (
+                              disabled === false ? (
                                  <IonButton 
                                     class='ion-color-remove-item'
                                     color='ion-color-remove-item'
@@ -283,7 +278,7 @@ function RegisterParts({disabled, match}) {
             }
          </section>
          {
-            location === '/home/menu2/add/step2' ? (
+            disabled === false ? (
                <div className='part-area-add'>
                   <IonButton
                      class='ion-color-part-area-add'
@@ -312,7 +307,7 @@ function RegisterParts({disabled, match}) {
                class='app-tab-btn ion-color-tab-back' 
                color='ion-color-tab-back'
                routerDirection='back' 
-               routerLink='/home/menu2/add'
+               onClick={()=> history.goBack()}
             >
                이전
             </IonButton>
@@ -327,4 +322,4 @@ function RegisterParts({disabled, match}) {
    )
 }
 
-export default RegisterParts;
+export default RepairPart;

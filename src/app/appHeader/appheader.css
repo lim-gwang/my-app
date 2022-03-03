@@ -11,3 +11,10 @@
    padding-right:10px;
    background:url(../../images/common/repaireBtn.png) left 0 top 15px / auto no-repeat;
 }
+.deleteBtn {
+   font-size:16px;
+   color:#1776e1;
+   padding-left:24px;
+   padding-right:10px;
+   background:url(../../images/app/Frame.png) left 0 top 15px / auto no-repeat;
+}

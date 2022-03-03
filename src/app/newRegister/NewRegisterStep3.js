@@ -46,7 +46,7 @@ function NewRegisterStep3({title, match}) {
 
                setItemTarget(res.IdentityCode);
 
-               if(res.IdentityCode) {
+               if(res.Result) {
                   setShowAlert3(true);
                } else {
                   setShowAlert4(true);
@@ -96,7 +96,6 @@ function NewRegisterStep3({title, match}) {
                onDidDismiss={() => {
                   setShowAlert3(false);
                   dispatch(csClear());
-                  history.push('/home');
                }}
                cssClass='custom-alert-modal'
                header={'CS요청이 완료되었습니다.'}

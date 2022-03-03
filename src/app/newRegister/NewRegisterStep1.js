@@ -28,6 +28,9 @@ function NewRegister({title, match}) {
          [name]: e.target.value,
       });
    }
+   
+   let repair= true;
+   if(match.params.pathName === 'add') repair= false;
 
    return(
       <IonPage>
@@ -36,7 +39,7 @@ function NewRegister({title, match}) {
             <h2 className='list-title' style={{color: '#1776e1'}}>
                <span>STEP1.</span> CS 요청 정보 입력
             </h2>
-           <RegisterDevice deviceSave={deviceSave}/>
+           <RegisterDevice deviceSave={deviceSave} match={match.params.pathName}/>
          </IonContent>
       </IonPage>
    )
